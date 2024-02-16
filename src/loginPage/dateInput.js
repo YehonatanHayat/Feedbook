@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './dateInput.css';
 function DateInput({ year, setYear, month, setMonth, day, setDay, yearError }) {
   // Define an array of month names
   const monthNames = [
@@ -9,7 +9,7 @@ function DateInput({ year, setYear, month, setMonth, day, setDay, yearError }) {
 
   // Generate options for years, months, and days
   const years = [];
-  for (let i = 2024; i >= 1950; i--) {
+  for (let i = 2020; i >= 1950; i--) {
     years.push(<option key={i} value={i}>{i}</option>);
   }
 
@@ -22,6 +22,8 @@ function DateInput({ year, setYear, month, setMonth, day, setDay, yearError }) {
   for (let i = 1; i <= 31; i++) {
     days.push(<option key={i} value={i}>{i}</option>);
   }
+
+  
 
   return (
     <div className="mb-3 d-flex align-items-center date-input-container">
@@ -45,7 +47,7 @@ function DateInput({ year, setYear, month, setMonth, day, setDay, yearError }) {
         <option value="">Day</option>
         {days}
       </select>
-      {yearError && <div className="text-danger">{yearError}</div>}
+      {yearError && <div className="text-danger" >{yearError}</div>}
     </div>
   );
 }

@@ -53,26 +53,37 @@ h1 {
 
 /* Styles for night mode */
 .night-mode {
-    background-color: #000; /* Set background color to black when night mode is activated */
+    background-color: #000;
     margin: 0;
     padding: 0;
 }
 
 .night-mode .left-section,
 .night-mode .right-section {
-    color: #fff; /* Set text color to white when night mode is activated */
+    color: #fff; 
 }
 
-/* Night mode button */
 .night-mode-btn {
-    position: absolute; /* Position the button absolutely */
-    top: 10px; /* 10px from the top */
-    left: 10px; /* 10px from the left */
-    cursor: pointer; /* Add cursor pointer */
+    position: absolute; 
+    top: 10px; 
+    left: 10px; 
+    cursor: pointer; 
 }
 
-/* Night mode icon in night mode */
 .night-mode-icon {
-    color: #fff; /* Set icon color to white */
+    color: #fff; 
 }
 
+.night-mode .right-section {
+    flex: 1; /* Fill remaining space */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+    max-width: 100%; /* Set maximum width to 50% of the viewport */
+    max-height: 100%; /* Set maximum height to 50% of the viewport */
+    padding: 20px; /* Add padding */
+    border: 2px solid rgb(245, 245, 245); /* Add border */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    margin-left: 20px; /* Move the right container 20px to the right */
+}

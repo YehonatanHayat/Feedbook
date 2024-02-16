@@ -16,7 +16,7 @@ export function useUserInitialization() {
         email: 'yorm@gmail.com',
         password: 'qwer',
         dob: '2008-03-02',
-        gender: 'male'
+        gender: 'other'
       }
     ]);
   }, []);

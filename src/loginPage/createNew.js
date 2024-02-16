@@ -3,8 +3,40 @@ import './createNew.css'; // Import the CSS file
 import DateInput from './dateInput.js';
 import Gender from './gender.js';
 import { useUserInitialization } from './users.js';
+import TakePhoto from './takePhoto';
+
 
 function CreateNew() {
+  const [va, setVa] = useState(false); // Initialize va state variable
+  useEffect(() => {
+
+  
+    // Initialize Bootstrap popover when component mounts
+    const popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+    popoverTriggerList.map(function (popoverTriggerEl) {
+      return new window.bootstrap.Popover(popoverTriggerEl);
+    });
+
+    // Add event listener to close popover when clicking outside
+    const handleDocumentClick = (event) => {
+      const popover = document.querySelector('.popover');
+      if (popover && !popover.contains(event.target)) {
+        popoverTriggerList.forEach((popoverTriggerEl) => {
+          const popoverInstance = window.bootstrap.Popover.getInstance(popoverTriggerEl);
+          if (popoverInstance) {
+            popoverInstance.hide();
+          }
+        });
+      }
+    };
+
+    document.addEventListener('click', handleDocumentClick);
+
+    return () => {
+      document.removeEventListener('click', handleDocumentClick);
+    };
+  }, []);
+
   const { users, setUsers } = useUserInitialization();
 
   const [password, setPassword] = useState('');
@@ -16,8 +48,16 @@ function CreateNew() {
   const [yearError, setYearError] = useState('');
   const [showPasswordError, setShowPasswordError] = useState(false);
   const [emailError, setEmailError] = useState('');
-  const [gender, setGender] = useState('male'); // State for gender
+  const [gender, setGender] = useState('');
+  const [genderError, setGenderError] = useState('');
+  const [photo, setPhoto] = useState(null); // Add this line to declare setPhoto
+  const [photoError, setPhotoError] = useState(''); // Add this line to declare photoError
   const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,14}$/;
+
+
+  const handlePhotoSelect = (selectedPhoto) => {
+    setPhoto(selectedPhoto); // Update the photo state with the selected photo
+  };
 
   const handlePasswordChange = (event) => {
     const newPassword = event.target.value;
@@ -50,12 +90,41 @@ function CreateNew() {
   const handleGenderChange = (selectedGender) => {
     setGender(selectedGender);
   };
+  
 
+  
   const handleSubmit = (event) => {
     event.preventDefault();
 
+   
+
+    // Check if year, month, day, and photo are filled
+    if (!year || !month || !day) {
+      setYearError('Please select birthday date');
+      return; // Prevent further execution if any of year, month, or day is missing
+    } else {
+    
+      setYearError('');
+    }
+    if (!gender) {
+      setGenderError('Please select gender');
+      return; // Prevent further execution if any of year, month, or day is missing
+    } else {
+    
+      setGenderError('');
+    }
+
+    // Check if photo is uploaded
+    if (!photo) {
+      setPhotoError('Please upload a photo');
+      return;
+    } else {
+      
+      setPhotoError('');
+    }
+
     if (year > 2010) {
-      setYearError('Year cannot be greater than 2010');
+      setYearError('Sorry, it\'s not possible to open an account under 14');
       return; // Prevent further execution if year is invalid
     } else {
       setYearError('');
@@ -70,34 +139,33 @@ function CreateNew() {
     } else {
       setEmailError('');
     }
-
+    setVa(false);
     // If all validations pass, create a new user object
     const newUser = {
+      
       email: userEmail,
       password: password,
       dob: `${year}-${month}-${day}`,
-      gender: gender
+      gender: gender,
+      photo: photo // Add photo to newUser object
     };
 
     // Add the new user to the array of users
     setUsers([...users, newUser]);
 
-    // Close modal or perform any necessary action
-    closeModal();
-  };
 
-  const closeModal = () => {
-    // Implement modal close logic if needed
   };
 
   return (
+    
     <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div className="modal-dialog">
         <div className="modal-content">
-            <h1 className="modal-title fs-5" >Sign up</h1>
-            it's quick and easy.
+          <div className="modal-header">
+            <h1 className="modal-title fs-5">Sign up</h1>
+          </div>
           
-          <div className="modal-body">
+          <div className="create-new-modal">
             <form onSubmit={handleSubmit}>
               <div className="mb-3 row">
                 <div className="col">
@@ -106,25 +174,27 @@ function CreateNew() {
                 </div>
               </div>
               <div className="mb-3">
-                <input type="password" className="form-control" id="password" placeholder="Password" value={password} onChange={handlePasswordChange} required data-bs-toggle="tooltip" data-bs-placement="right" title="The password must consists of 8-14 combination of letters and numbers"/>
-              </div>
+              <input type="password" className="form-control" id="password" placeholder="Password" value={password} onChange={handlePasswordChange} required data-bs-toggle="tooltip" data-bs-placement="right" title="The password must consists of 8-14 combination of letters and numbers"/>              </div>
               <div className="mb-3">
                 <input type="password" className="form-control" id="confirmPassword" placeholder="Confirm password" value={confirmPassword} onChange={handleConfirmPasswordChange} onBlur={handleConfirmPasswordChange} required />
                 {showPasswordError && <div className="text-danger">{passwordError}</div>}
               </div>
-
               <DateInput year={year} setYear={setYear} month={month} setMonth={setMonth} day={day} setDay={setDay} yearError={yearError} />
-              <Gender onChange={handleGenderChange} />
-           
+              <Gender onChange={handleGenderChange} genderError={genderError} />
+              <TakePhoto onPhotoSelect={handlePhotoSelect} />
+              {photoError && <div className="text-danger">{photoError}</div>}
               <div className="modal-footer">
-                <button type="submit" className="btn btn-primary">Register</button>
+                <button type="submit" className="btn btn-primary" >Register</button>
               </div>
             </form>
           </div>
         </div>
       </div>
+      
     </div>
   );
 }
 
 export default CreateNew;
+
+// data-bs-dismiss="modal"disabled={va}
