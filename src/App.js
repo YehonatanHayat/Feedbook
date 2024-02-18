@@ -1,10 +1,10 @@
 
 import './App.css';
-import FeedPage from './loginPage/FeedPage.js';
+import FeedPage from './Feed/feed.js';
 import  LoginPage from'./loginPage/loginPage.js';
 import { BrowserRouter, Routes, Route, Link, Navigate, useNavigate } from 'react-router-dom';
 
-import Feed from './Feed/feed.js';
+
 
 
 

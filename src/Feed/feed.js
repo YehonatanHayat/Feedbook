@@ -9,6 +9,7 @@ import Icon from './icons.js';
 import Card from './card.js';
 import Menu from './menu.js';
 import Status from './status.js';
+import User from './userInput.js';
 
 
 
@@ -21,7 +22,7 @@ function Feed(){
             <Search/>
             <FaceLogo/>
             <Options/></div>
-          <div class="col-5"><Icon/> <Status/> <Card/>   </div>
+          <div class="col-5"><Icon/> <Status/> <Card/>  </div>
           <div class="col"> <Menu/> <People/>  </div>
           
         </div>
