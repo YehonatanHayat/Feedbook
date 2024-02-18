@@ -10,13 +10,15 @@ export function useUserInitialization() {
         email: 'yosi@gmail.com',
         password: '1234',
         dob: '2010-01-01',
-        gender: 'male'
+        gender: 'male',
+        photo: null
       },
       {
         email: 'yorm@gmail.com',
         password: 'qwer',
         dob: '2008-03-02',
-        gender: 'other'
+        gender: 'female',
+        photo: null
       }
     ]);
   }, []);

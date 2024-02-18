@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './createNew.css'; // Import the CSS file
+import './createNew.css';
 import DateInput from './dateInput.js';
 import Gender from './gender.js';
 import { useUserInitialization } from './users.js';
@@ -7,8 +7,9 @@ import TakePhoto from './takePhoto';
 
 
 function CreateNew() {
-  const [va, setVa] = useState(false); // Initialize va state variable
   useEffect(() => {
+
+    
 
   
     // Initialize Bootstrap popover when component mounts
@@ -82,7 +83,6 @@ function CreateNew() {
       setPasswordError('Passwords do not match');
       setShowPasswordError(true);
     } else {
-      setPasswordError('');
       setShowPasswordError(false);
     }
   };
@@ -95,40 +95,38 @@ function CreateNew() {
   
   const handleSubmit = (event) => {
     event.preventDefault();
-
    
-
-    // Check if year, month, day, and photo are filled
+    //date
     if (!year || !month || !day) {
       setYearError('Please select birthday date');
-      return; // Prevent further execution if any of year, month, or day is missing
+      return;
     } else {
-    
       setYearError('');
     }
+    //age
+    if (year > 2010) {
+      setYearError('Sorry, it\'s not possible to open an account under 14');
+      return;
+    } else {
+      setYearError('');
+    }
+    //gender
     if (!gender) {
       setGenderError('Please select gender');
-      return; // Prevent further execution if any of year, month, or day is missing
+      return;
     } else {
-    
       setGenderError('');
     }
 
-    // Check if photo is uploaded
+    // photo
     if (!photo) {
       setPhotoError('Please upload a photo');
       return;
     } else {
-      
       setPhotoError('');
     }
 
-    if (year > 2010) {
-      setYearError('Sorry, it\'s not possible to open an account under 14');
-      return; // Prevent further execution if year is invalid
-    } else {
-      setYearError('');
-    }
+
 
     // Check if the email already exists in the array of users
     const userEmail = document.getElementById('email').value;
@@ -139,20 +137,19 @@ function CreateNew() {
     } else {
       setEmailError('');
     }
-    setVa(false);
+
     // If all validations pass, create a new user object
     const newUser = {
-      
+     
       email: userEmail,
       password: password,
       dob: `${year}-${month}-${day}`,
       gender: gender,
-      photo: photo // Add photo to newUser object
+      photo: photo 
     };
-
+    
     // Add the new user to the array of users
     setUsers([...users, newUser]);
-
 
   };
 
@@ -174,7 +171,8 @@ function CreateNew() {
                 </div>
               </div>
               <div className="mb-3">
-              <input type="password" className="form-control" id="password" placeholder="Password" value={password} onChange={handlePasswordChange} required data-bs-toggle="tooltip" data-bs-placement="right" title="The password must consists of 8-14 combination of letters and numbers"/>              </div>
+              <input type="password" className="form-control" id="password" placeholder="Password" value={password} onChange={handlePasswordChange} required data-bs-toggle="tooltip" data-bs-placement="right" title="The password must consists of 8-14 combination of letters and numbers"/>
+                </div>
               <div className="mb-3">
                 <input type="password" className="form-control" id="confirmPassword" placeholder="Confirm password" value={confirmPassword} onChange={handleConfirmPasswordChange} onBlur={handleConfirmPasswordChange} required />
                 {showPasswordError && <div className="text-danger">{passwordError}</div>}
@@ -184,7 +182,9 @@ function CreateNew() {
               <TakePhoto onPhotoSelect={handlePhotoSelect} />
               {photoError && <div className="text-danger">{photoError}</div>}
               <div className="modal-footer">
+                
                 <button type="submit" className="btn btn-primary" >Register</button>
+
               </div>
             </form>
           </div>
