@@ -5,10 +5,11 @@
 
 import React, { useState, useEffect } from 'react';
 import './loginPage.css';
-import FeedPage from './FeedPage.js';
 import CreateNew from './createNew';
 import { useUserInitialization } from './users.js';
-import { BrowserRouter, Routes, Route, Link, Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
+
 
 function LoginPage() {
   const [isNightMode, setIsNightMode] = useState(false);
@@ -36,7 +37,7 @@ function LoginPage() {
       console.log('Login successful');
       setIsLoggedIn(true);
       setError('');
-     navigate('/feed');
+     navigate('/feed', {state: {user}});
     } else {
       setError('Invalid email or password');
     }
