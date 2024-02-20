@@ -7,12 +7,20 @@ import glass from '../images/glass.jpg';
 import beach from '../images/beach.jpg';
 import hotel from '../images/hotel.jpg';
 import rest from '../images/rest.jpg';
+import UserInput from './userInput.js';
 
 
 function Options(){
     return(
     <div>
         <ul class="list-group">
+
+        <li class="list-group-item d-flex align-items-center">
+  
+    <UserInput/>
+  </li>
+
+
   <li class="list-group-item d-flex align-items-center">
   <img src={tv} alt="Sample" width="35" height="35" />
     <span class="w-10 m-4"> Watch</span>

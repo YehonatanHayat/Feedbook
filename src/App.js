@@ -1,9 +1,10 @@
 
 import './App.css';
+import FeedPage from './Feed/feed.js';
 import  LoginPage from'./loginPage/loginPage.js';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import Feed from './Feed/feed.js';
+
 
 
 

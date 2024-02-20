@@ -1,98 +1,92 @@
-
-
 .search-input1 {
-    display: flex;
-    align-items: center;
-    padding-top: 1px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 40px; /* Set overall border radius */
-    background-color: #fff;
-    border-top-left-radius: 0; /* Rounded top-left border */
-    border-bottom-left-radius: 0; /* Rounded bottom-left border */
-     /* Adjust the margin-top value to move the button farther from the top */
-    margin-left: 5px;
-    margin-top: 0px;
-    background-color: #ccc;
-    border: none; /* Remove default border */
-    border-bottom: 1px solid #ccc; /* Add border only to the bottom */
-    outline: none;
-    width: 550px;
-   
-  }
-  
-  .bi-search {
-    margin-right: 8px;
-  }
+  display: flex;
+  align-items: center;
+  padding-top: 1px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 40px; /* Set overall border radius */
+  background-color: #fff;
+  border-top-left-radius: 0; /* Rounded top-left border */
+  border-bottom-left-radius: 0; /* Rounded bottom-left border */
+  margin-left: 60px; /* Adjusted margin to provide space for the photo */
+  margin-top: 0px;
+  width: 390px; /* Adjusted width to accommodate the photo */
+  outline: none;
+}
 
-  .search-button span {
-    display: flex;
-    align-items: center;
-  }
+.bi-search {
+  margin-right: 8px;
+}
 
-  .search-button svg {
-    margin-right: 8px;
-  }
+.search-button span {
+  display: flex;
+  align-items: center;
+}
 
+.search-button svg {
+  margin-right: 8px;
+}
 
-.card{
-    width: 600px;
-    height: 100px;
-    margin-top: 100px;
+.card {
+  width: 600px;
+  height: auto; /* Adjusted height */
+  margin-top: 100px;
+  position: relative;
+}
+
+.user-photo1 {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  position: absolute;
+  top: 40%; /* Center vertically */
+  left: 0px; /* Adjusted left position */
+  transform: translateY(-50%); /* Center vertically */
 }
 
 .list-group-horizontal {
-    list-style-type: none; /* Remove bullet points */
-    padding: 0; /* Remove default padding */
-    display: flex;
-    margin-left: 10px;
-    margin-top: -60px;
-  }
-  
-  .list-group-horizontal li {
-    display: inline-block; /* Display list items horizontally */
-    margin-right: 60px; /* Add spacing between items */
-  }
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  top: -10px;
+  left: 450px;
+}
 
-  .list-group-horizontal li span {
-    font-size: 10px; /* Set font size to a smaller value */
-  }
+.search-container {
+  position: relative; /* Ensure relative positioning for absolute elements */
+}
 
-  .list-group-horizontal .list-group-item img {
-    margin-right: -20px; /* Add spacing between image and text */
-  }
-  .list-group-horizontal .list-group-item {
-    display: inline-block;
-  }
+.divider2 {
+  position: absolute; /* Position the divider line absolutely */
+  top: 205%; /* Position it below the user photo/search input */
+  left: 0; /* Align it to the left edge */
+  margin-top: 10px; /* Adjusted margin to add space between the user photo/search input and the divider */
+  width: 100%; /* Ensure full width */
+}
 
-  .list-group-horizontal .list-group-item button {
-    display: flex; /* Display buttons as flex containers */
-    align-items: center; /* Align items vertically */
-    background: none; /* Remove background */
-    border: none; /* Remove border */
-    cursor: pointer;
-    padding: 1px 1px;
-  }
 
-  .list-group-horizontal .list-group-item button:hover::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #f0f0f0;
-    z-index: -1;
-  }
-  
-  .list-group-horizontal .list-group-item button img,
-  .list-group-horizontal .list-group-item button span {
-    position: relative;
-    z-index: 1;
-  }
+.list-group-horizontal li {
+  margin-right: 20px;
+}
 
-/* .divider1{
-   margin-top: 10px;
-  
-} */
+.list-group-horizontal .list-group-item button {
+  display: flex; /* Ensure the button content is flex */
+  align-items: center; /* Align content vertically */
+  background: none; /* Remove background */
+  border: none; /* Remove border */
+  cursor: pointer;
+  padding: 0; /* Remove padding */
+}
 
+.list-group-horizontal .list-group-item button img {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+}
+
+.list-group-horizontal .list-group-item button span {
+  font-size: 10px;
+}

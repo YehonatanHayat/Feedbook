@@ -1,10 +1,13 @@
 
+
 import React, { useState, useEffect } from 'react';
 import './loginPage.css';
 import CreateNew from './createNew';
 import { useUserInitialization } from './users.js';
 import { useNavigate } from 'react-router-dom';
+
 import Logo from './logo.js';
+
 
 function LoginPage() {
   const [isNightMode, setIsNightMode] = useState(false);
@@ -32,7 +35,9 @@ function LoginPage() {
       console.log('Login successful');
       setIsLoggedIn(true);
       setError('');
+
       navigate('/feed', { state: { user } }); // Pass user object to the Feed component
+
     } else {
       setError('Invalid email or password');
     }
