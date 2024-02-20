@@ -1,4 +1,6 @@
+
 import React from 'react';
+
 import Search from './search.js';
 import FaceLogo from './faceLogo.js';
 import Options from './options.js';
@@ -7,6 +9,7 @@ import Icon from './icons.js';
 import Card from './card.js';
 import Menu from './menu.js';
 import Status from './status.js';
+
 import PostList from './postList.js';
 import Add from './addPost.js';
 
@@ -30,6 +33,7 @@ function Feed() {
         </div>
       </div>
       <Add/>
+
     </div>
   );
 }

@@ -16,7 +16,9 @@ function Menu() {
         // Perform logout actions (e.g., clear session, etc.)
         
         // Redirect the user to the sign-in page
+
         navigate('/'); // Replace '/signin' with the actual URL of your sign-in page
+
       };
 
     const [isDarkMode, setIsDarkMode] = useState(false);

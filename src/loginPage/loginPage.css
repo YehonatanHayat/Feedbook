@@ -87,3 +87,8 @@ h1 {
     box-sizing: border-box; /* Include padding and border in the element's total width and height */
     margin-left: 20px; /* Move the right container 20px to the right */
 }
+
+.night-mode  {
+
+    background-color: #000;
+}
