@@ -7,10 +7,12 @@ export function useUserInitialization() {
     // Initialize users array with two users
     setUsers([
       {
+        name: 'Jake Peralta',
         email: 'yosi@gmail.com',
         password: '1234',
         dob: '2010-01-01',
         gender: 'male',
+        name: 'yyyyyyyyyyyyyy',
         photo: null
       },
       {
