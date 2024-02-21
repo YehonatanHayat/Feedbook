@@ -1,14 +1,12 @@
 
 
-
-
-
 import React, { useState, useEffect } from 'react';
 import './loginPage.css';
 import CreateNew from './createNew';
 import { useUserInitialization } from './users.js';
 import { useNavigate } from 'react-router-dom';
 
+import Logo from './logo.js';
 
 
 function LoginPage() {
@@ -37,7 +35,9 @@ function LoginPage() {
       console.log('Login successful');
       setIsLoggedIn(true);
       setError('');
-     navigate('/feed', {state: {user}});
+
+      navigate('/feed', { state: { user } }); // Pass user object to the Feed component
+
     } else {
       setError('Invalid email or password');
     }
@@ -46,23 +46,19 @@ function LoginPage() {
   return (
   
       <div className={`container ${isNightMode ? 'night-mode' : ''}`}>
-        <div
+          <div
           className={`night-mode-btn ${isNightMode ? 'night-mode-icon' : ''}`}
           onClick={toggleNightMode}
         >
           <i className="bi bi-moon"></i>
         </div>
+        <Logo/>
 
-        <div className="left-section">
-          <h1>Feedbook</h1>
-          <p>Connect with friends and the world around you on Foobook.</p>
-        </div>
 
         <div className="right-section-container">
           <div className="right-section">
             <div className="right-section-content">
-              <input
-                type="email"
+              <input type="email"
                 className="form-control"
                 id="exampleFormControlInput1"
                 placeholder="Email or phone number"
@@ -100,13 +96,6 @@ function LoginPage() {
             </div>
           </div>
         </div>
-        
-        {/* <Routes>
-          <Route
-            path="/feed"
-            element={isLoggedIn ? <FeedPage /> : <Navigate to="/feed"/>}
-          />
-        </Routes> */}
       
       <CreateNew />
       </div>
@@ -114,6 +103,3 @@ function LoginPage() {
 }
 
 export default LoginPage;
-
-
-

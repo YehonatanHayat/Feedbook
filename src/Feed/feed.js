@@ -7,6 +7,7 @@ import Icon from './icons.js';
 import Card from './card.js';
 import Menu from './menu.js';
 import Status from './status.js';
+
 import PostList from './postList.js';
 import Add from './addPost.js';
 import Comment from './comment.js';
@@ -42,7 +43,9 @@ function Feed() {
         </div>
       </div>
       <Add/>
+
      <Comment/>
+
     </div>
   );
 }
