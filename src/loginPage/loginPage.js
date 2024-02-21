@@ -89,7 +89,7 @@ function LoginPage() {
                 type="button"
                 className="btn btn-success"
                 data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
+                data-bs-target="#signUp-modal"
               >
                 Create new account
               </button>
@@ -97,7 +97,7 @@ function LoginPage() {
           </div>
         </div>
       
-      <CreateNew />
+        <CreateNew isNightMode={isNightMode} />
       </div>
   );
 }
