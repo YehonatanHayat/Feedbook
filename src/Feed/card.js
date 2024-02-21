@@ -33,20 +33,20 @@ function Card() {
         </div>
        
 
-      <ul class="list-group list-group-horizontal">
-        <li class="list-group-item">
+      <ul class="list-group2 list-group-horizontal">
+        <li class="list-group-item2">
           <button class="btn-item">
             <img src={photo} alt="Sample" width="20" height="20" />
             <span class="w-10 m-4"> Photo/Video</span>
           </button>
         </li>
-        <li class="list-group-item">
+        <li class="list-group-item2">
           <button class="btn-item">
             <img src={tag} alt="Sample" width="20" height="20" />
             <span class="w-10 m-4"> Tag Friends</span>
           </button>
         </li>
-        <li class="list-group-item">
+        <li class="list-group-item2">
           <button class="btn-item">
             <img src={feelings} alt="Sample" width="20" height="25" />
             <span class="w-10 m-4"> Feelings/Activity</span>

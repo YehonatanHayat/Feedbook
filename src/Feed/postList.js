@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import Post from './post.js';
 import './postList.css';
-import sun from '../images/sun.jpg';
-import beach2 from '../images/beach2.jpg';
+
 import UserInput from './userInput.js';
 
 function PostList() {
@@ -93,12 +92,9 @@ function PostList() {
 
 <div class="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" style={{ position: 'fixed', top: '50px' }}> {/* Adjust the top position */}
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
+    <div class="modal-content post">
+     
+      <div class="modal-body post">
         <input type="text" name="content" placeholder="Enter post content" />
         <input type="file" name="pic" accept="image/*" />
 

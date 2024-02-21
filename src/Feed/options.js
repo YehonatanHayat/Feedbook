@@ -10,34 +10,34 @@ import rest from '../images/rest.jpg';
 import UserInput from './userInput.js';
 
 
-function Options(){
+function Options({isDarkMode}){
     return(
-    <div>
-        <ul class="list-group">
+    <div >
+        <ul class="list-group1">
 
-        <li class="list-group-item d-flex align-items-center">
+        <li class="list-group-item1 d-flex align-items-center">
   
     <UserInput/>
   </li>
 
 
-  <li class="list-group-item d-flex align-items-center">
+  <li class={`list-group-item1 d-flex align-items-center ${isDarkMode ? 'night-mode-list2' : ''}`}>
   <img src={tv} alt="Sample" width="35" height="35" />
     <span class="w-10 m-4"> Watch</span>
     
   </li>
-  <li class="list-group-item d-flex align-items-center">
+  <li class={`list-group-item1 d-flex align-items-center ${isDarkMode ? 'night-mode-list2' : ''}`}>
   <img src={calendar} alt="Sample" width="25" height="25" />
 <span class="w-10 m-4"> Events</span>
     
   </li>
-  <li class="list-group-item d-flex align-items-center">
+  <li class={`list-group-item1 d-flex align-items-center ${isDarkMode ? 'night-mode-list2' : ''}`}>
  
   <img src={friends} alt="Sample" width="25" height="25" />
 <span class="w-10 m-4"> Friends</span>
     
   </li>
-  <li class="list-group-item d-flex align-items-center">
+  <li class={`list-group-item1 d-flex align-items-center ${isDarkMode ? 'night-mode-list2' : ''}`}>
   <img src={glass} alt="Sample" width="25" height="25" />
   <span class="w-10 m-4"> Memories</span>
     
@@ -45,28 +45,28 @@ function Options(){
 </ul>
 
 
-<hr className="divider" />
+<hr className={`divider ${isDarkMode ? 'night-mode-list2' : ''}`}/>
 
-<h2 class="shortcuts-title">Shortcuts</h2> 
+<h2 class={`shortcuts-title ${isDarkMode ? 'night-mode-list2' : ''}`}>Shortcuts</h2> 
 
-<ul class="list-group">
-  <li class="list-group-item d-flex align-items-center">
+<ul class="list-group1">
+  <li class={`list-group-item1 d-flex align-items-center ${isDarkMode ? 'night-mode-list2' : ''}`}>
   <img src={hikes} alt="Sample" width="35" height="35" />
     <span class="w-10 m-4"> Hikes</span>
     
   </li>
-  <li class="list-group-item d-flex align-items-center">
+  <li class={`list-group-item1 d-flex align-items-center ${isDarkMode ? 'night-mode-list2' : ''}`}>
   <img src={beach} alt="Sample" width="35" height="35" />
 <span class="w-10 m-4"> Vacations</span>
     
   </li>
-  <li class="list-group-item d-flex align-items-center">
+  <li class={`list-group-item1 d-flex align-items-center ${isDarkMode ? 'night-mode-list2' : ''}`}>
  
   <img src={hotel} alt="Sample" width="38" height="38" />
 <span class="w-10 m-4"> Hotels</span>
     
   </li>
-  <li class="list-group-item d-flex align-items-center">
+  <li class={`list-group-item1 d-flex align-items-center ${isDarkMode ? 'night-mode-list2' : ''}`}>
   <img src={rest} alt="Sample" width="38" height="38" />
   <span class="w-10 m-4"> Restaurant</span>
     
