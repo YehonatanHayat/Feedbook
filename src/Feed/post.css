@@ -79,8 +79,26 @@
   
   .post-pic {
     
-    max-width: 300px;
+    max-width: 350px;
     max-height: 500px;
   }
 
+  .action-buttons {
+    display: flex; /* Arrange the buttons horizontally */
+    gap: 120px; /* Add some space between the buttons */
+    margin-top: 10px; /* Add margin between the content and the buttons */
+  }
   
+  /* Style for the delete button */
+  .delete-button {
+    background-color: transparent;
+    border: none;
+    color: red;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  /* Additional styling for the delete button on hover */
+  .delete-button:hover {
+    color: darkred;
+  }

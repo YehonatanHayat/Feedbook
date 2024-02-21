@@ -47,13 +47,16 @@
 
 .list-group-horizontal {
   list-style-type: none;
-  padding: 0;
+  padding: 5px;
   display: flex;
   justify-content: flex-end;
   position: relative;
-  top: -10px;
-  left: 450px;
+  top: 20px;
+  left: -120px;
+  
 }
+
+
 
 .search-container {
   position: relative; /* Ensure relative positioning for absolute elements */
@@ -72,7 +75,7 @@
   margin-right: 20px;
 }
 
-.list-group-horizontal .list-group-item button {
+.list-group-horizontal .list-group-item2 button {
   display: flex; /* Ensure the button content is flex */
   align-items: center; /* Align content vertically */
   background: none; /* Remove background */
@@ -81,12 +84,12 @@
   padding: 0; /* Remove padding */
 }
 
-.list-group-horizontal .list-group-item button img {
+.list-group-horizontal .list-group-item2 button img {
   width: 16px;
   height: 16px;
   margin-right: 4px;
 }
 
-.list-group-horizontal .list-group-item button span {
+.list-group-horizontal .list-group-item2 button span {
   font-size: 10px;
 }
