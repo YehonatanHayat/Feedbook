@@ -1,7 +1,7 @@
 
 .list-container {
     position: fixed; /* Position the container relative to the viewport */
-    bottom: 20px; /* Distance from the bottom of the viewport */
+    bottom: -100px; /* Distance from the bottom of the viewport */
     right: 20px; /* Distance from the right of the viewport */
   }
 
@@ -18,6 +18,9 @@
   .list-group-item {
     display: flex; /* Use flexbox */
     align-items: center; /* Align items vertically */
+    border: 0;
+    height: 70px;
+    
   }
   
   /* Define styles for the name */
@@ -29,3 +32,10 @@
     
     text-overflow: ellipsis; /* Show ellipsis (...) for overflow text */
   }
+
+  .list-group {
+    width: 180px;
+    height: 500px;
+   margin-bottom: 0px;
+    
+}

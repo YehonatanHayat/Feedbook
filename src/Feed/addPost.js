@@ -1,28 +1,12 @@
 import React, { useState } from 'react';
 import Post from './post.js';
 import './postList.css';
-import sun from '../images/sun.jpg';
-import beach2 from '../images/beach2.jpg';
+
 import UserInput from './userInput.js';
+import Set from './setPost.json';
 
 function PostList() {
-    const [posts, setPosts] = useState([
-        {
-            id: 1,
-            pic: sun,
-            content: 'Here comes the sun!',
-            author: <UserInput/>,
-            date: new Date().toLocaleString()
-        },
-        {
-            id: 2,
-            pic: beach2,
-            content: 'I got beaches',
-            author: <UserInput/>,
-            date: new Date().toLocaleString()
-        },
-        // Add more predefined posts as needed
-    ]);
+    const [posts, setPosts] = useState(Set);
 
     // const addPost = (content, author, pic = null) => {
     //     const newPost = {
