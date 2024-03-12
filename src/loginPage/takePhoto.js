@@ -11,8 +11,10 @@ function TakePhoto({ onPhotoSelect }) {
 
   return (
     <div className="mb-3">
-      <div className="title">Add photo</div>
-      <input type="file" className="form-control small-input" id="photo" accept="image/*" onChange={handlePhotoUpload} />
+      <div className="flex-container">
+        <div className="title">Add photo</div>
+        <input type="file" className="form-control small-input" id="photo" accept="image/*" onChange={handlePhotoUpload} />
+      </div>
     </div>
   );
 }

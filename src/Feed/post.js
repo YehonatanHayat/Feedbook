@@ -1,7 +1,8 @@
 import React from 'react';
 import './post.css'; // Assuming you have a CSS file for post styling
 import LikeButton from './like.js';
-import Comment from './comment.js';
+import Share from './share.js';
+import CommentButton from './comment'; // Import the CommentButton component
 
 function Post({ id, content, author, date, pic, onDelete }) {
     const handleDelete = () => {
@@ -21,13 +22,11 @@ function Post({ id, content, author, date, pic, onDelete }) {
         <img src={pic} alt="Post-pic" className="post-pic" />
         <div className="action-buttons">
           <LikeButton />
-          <Comment />
+          <CommentButton postId={id} /> 
+          <Share/>
         </div>
-
-       
       </div>
     );
-  }
-  
-  export default Post;
-  
+}
+
+export default Post;
