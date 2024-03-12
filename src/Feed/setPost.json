@@ -40,6 +40,49 @@
         "content": "Take me out to the ballgame",
         "author": "Justin Case",
         "date": "5 hours ago"
+    },
+
+    {
+        "id": 6,
+        "pic": "couch.jpg",
+        "content": "Looking to sell this couch",
+        "author": "John Johnson",
+        "date": "13 hours ago"
+    },
+
+
+    {
+        "id": 7,
+        "pic": "flowers.jpg",
+        "content": "I can buy myself flowers",
+        "author": "Juan direction",
+        "date": "23 hours ago"
+    },
+
+    {
+        "id": 8,
+        "pic": "paint.jpg",
+        "content": "bruhhhh",
+        "author": "Joe Mama",
+        "date": "4 day ago"
+    },
+
+    {
+        "id": 9,
+        "pic": "strawberry.jpg",
+        "content": "strawberry fields forever",
+        "author": "Jack Daniels",
+        "date": "week ago"
+    },
+
+    {
+        "id": 10,
+        "pic": "blogger.jpg",
+        "content": "#grrr_mondays",
+        "author": "Scooter Mcgruder",
+        "date": "3 weeks ago"
     }
+
+
     
 ]

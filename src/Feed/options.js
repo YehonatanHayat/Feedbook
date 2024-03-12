@@ -22,23 +22,23 @@ function Options({isDarkMode}){
 
 
   <li class={`list-group-item1 d-flex align-items-center ${isDarkMode ? 'night-mode-list2' : ''}`}>
-  <img src={tv} alt="Sample" width="35" height="35" />
+  <i class="bi bi-tv"></i>
     <span class="w-10 m-4"> Watch</span>
     
   </li>
   <li class={`list-group-item1 d-flex align-items-center ${isDarkMode ? 'night-mode-list2' : ''}`}>
-  <img src={calendar} alt="Sample" width="25" height="25" />
+  <i class="bi bi-calendar2-date"></i>
 <span class="w-10 m-4"> Events</span>
     
   </li>
   <li class={`list-group-item1 d-flex align-items-center ${isDarkMode ? 'night-mode-list2' : ''}`}>
  
-  <img src={friends} alt="Sample" width="25" height="25" />
+  <i class="bi bi-people"></i>
 <span class="w-10 m-4"> Friends</span>
     
   </li>
   <li class={`list-group-item1 d-flex align-items-center ${isDarkMode ? 'night-mode-list2' : ''}`}>
-  <img src={glass} alt="Sample" width="25" height="25" />
+  <i class="bi bi-hourglass-split"></i>
   <span class="w-10 m-4"> Memories</span>
     
   </li>
@@ -49,7 +49,7 @@ function Options({isDarkMode}){
 
 <h2 class={`shortcuts-title ${isDarkMode ? 'night-mode-list2' : ''}`}>Shortcuts</h2> 
 
-<ul class="list-group1">
+<ul class="list-group1 shortcuts">
   <li class={`list-group-item1 d-flex align-items-center ${isDarkMode ? 'night-mode-list2' : ''}`}>
   <img src={hikes} alt="Sample" width="35" height="35" />
     <span class="w-10 m-4"> Hikes</span>
