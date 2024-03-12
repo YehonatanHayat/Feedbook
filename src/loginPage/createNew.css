@@ -24,13 +24,4 @@
     color: black;
   }
 
-  .camera-container {
-    display: flex;
-    align-items: center;
-  }
-  
-  .video {
-    width: 200px; /* Adjust width as needed */
-    height: auto; /* Maintain aspect ratio */
-  }
-  
+
