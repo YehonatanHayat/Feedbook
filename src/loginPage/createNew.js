@@ -1,14 +1,13 @@
-
-
-
+// Code to create a new user account
 import React, { useState, useEffect } from 'react';
 import './createNew.css';
 import DateInput from './dateInput.js';
 import Gender from './gender.js';
 import { useUserInitialization } from './users.js';
 import TakePhoto from './takePhoto';
-
-function CreateNew() {
+import PasswordInput from './passwordInput';
+function CreateNew({ isNightMode }) {
+  const nightModeClass = isNightMode ? 'nightMode' : '';
   useEffect(() => {
     // Initialize Bootstrap popover when component mounts
     const popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
@@ -50,17 +49,16 @@ function CreateNew() {
   const [gender, setGender] = useState('');
   const [genderError, setGenderError] = useState('');
   const [photo, setPhoto] = useState(null);
-  const [photoError, setPhotoError] = useState('');
+  //const [photoError, setPhotoError] = useState('');
   const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,14}$/;
   const [nameError, setNameError] = useState('');
 
   const validateName = (name) => {
-    const nameRegex = /^[a-zA-Z\s]*$/; // Regex to match only English letters and spaces
+    const nameRegex = /^[a-zA-Z\s]*$/;
     return nameRegex.test(name);
   };
 
   const handleNameBlur = () => {
-    // Check if the name contains only English letters
     if (!validateName(name)) {
       setNameError('Name should contain only English letters');
     } else {
@@ -69,8 +67,7 @@ function CreateNew() {
   };
 
   const handlePhotoSelect = (selectedPhoto) => {
-    setPhoto(selectedPhoto);
-  };
+    setPhoto(selectedPhoto);};
 
   const handlePasswordChange = (event) => {
     const newPassword = event.target.value;
@@ -102,13 +99,12 @@ function CreateNew() {
   const handleGenderChange = (selectedGender) => {
     setGender(selectedGender);
   };
-
+  // If all fields are filled, return true to close the modal
   const handleCloseModel = () => {
     // Check if all fields are filled
     if (!year || !month || !day || !gender || !password || !confirmPassword ||emailError || !name) {
       return false; // Return false if any field is empty
     }
-    // If all fields are filled, return true to close the modal
     return true;
   };
 
@@ -124,8 +120,7 @@ function CreateNew() {
       setEmailError('Email already exists');
       return;
     } else {
-      setEmailError('');
-    }
+      setEmailError('');}
 
     // If all validations pass, create a new user object
     const newUser = {
@@ -140,7 +135,6 @@ function CreateNew() {
     // Add the new user to the array of users
     setUsers([...users, newUser]);
 
-    // Reset fields after successful registration
     resetFields();
   };
 
@@ -170,7 +164,8 @@ function CreateNew() {
   };
 
   return (
-    <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div className={`createNew ${nightModeClass}`}>
+    <div className="modal fade" id="signUp-modal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
@@ -178,6 +173,7 @@ function CreateNew() {
           </div>
           <div className="create-new-modal">
             <form onSubmit={handleSubmit}>
+            
             <div className="mb-3 row">
   <div className="col">
     <input
@@ -193,6 +189,7 @@ function CreateNew() {
   </div>
 </div>
 
+
               <div className="mb-3 row">
                 <div className="col">
                   <input type="email" className="form-control" id="email" value={email} onChange={(e) => setEmail(e.target.value)}
@@ -202,7 +199,13 @@ function CreateNew() {
                   {emailError && <div className="text-danger">{emailError}</div>}
                 </div>
               </div>
-              <div className="mb-3">
+              <PasswordInput password={password} setPassword={setPassword} confirmPassword={confirmPassword}
+                        setConfirmPassword={setConfirmPassword} handlePasswordChange={handlePasswordChange}
+                        handleConfirmPasswordChange={handleConfirmPasswordChange}
+                        handlePasswordFocus={handlePasswordFocus}
+                        showPasswordError={showPasswordError}
+                        passwordError={passwordError}/>
+              {/* <div className="mb-3">
                 <input type="password"className="form-control"id="password"placeholder="Password"value={password}onChange={handlePasswordChange}
                   onFocus={handlePasswordFocus} // Check email existence on focus
                   required
@@ -210,8 +213,8 @@ function CreateNew() {
                   data-bs-placement="right"
                   title="The password must consists of 8-14 combination of letters and numbers"
                 />
-              </div>
-              <div className="mb-3">
+              </div> */}
+              {/* <div className="mb-3">
                 <input
                   type="password"
                   className="form-control"
@@ -223,11 +226,11 @@ function CreateNew() {
                   required
                 />
                 {showPasswordError && <div className="text-danger">{passwordError}</div>}
-              </div>
+              </div> */}
               <DateInput year={year} setYear={setYear} month={month} setMonth={setMonth} day={day} setDay={setDay} yearError={yearError} />
               <Gender onChange={handleGenderChange} genderError={genderError} />
               <TakePhoto onPhotoSelect={handlePhotoSelect} />
-              {photoError && <div className="text-danger">{photoError}</div>}
+              {/* {photoError && <div className="text-danger">{photoError}</div>} */}
               <div className="modal-footer">
                 <button type="submit" className="btn btn-primary" disabled={!handleCloseModel()} data-bs-dismiss="modal">Register</button>
               </div>
@@ -235,6 +238,7 @@ function CreateNew() {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }
