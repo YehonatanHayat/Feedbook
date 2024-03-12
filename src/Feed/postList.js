@@ -4,7 +4,7 @@ import './postList.css';
 
 import UserInput from './userInput.js';
 
-function PostList() {
+function PostList({isDarkMode}) {
     const [posts, setPosts] = useState([
         // {
         //     id: 1,
@@ -90,8 +90,8 @@ function PostList() {
 </button>
 
 
-<div class="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" style={{ position: 'fixed', top: '50px' }}> {/* Adjust the top position */}
+<div class="modal fade AddPostModel" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-centered" >
     <div class="modal-content post">
      
       <div class="modal-body post">

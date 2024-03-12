@@ -93,3 +93,9 @@
 .list-group-horizontal .list-group-item2 button span {
   font-size: 10px;
 }
+
+.dark-mode   .card {
+  background-color: #111 ; /* Dark background color */
+   color: #fff;
+  border-color: #ffffff;;
+}

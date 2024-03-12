@@ -7,7 +7,7 @@ import feelings from '../images/feelings.jpg';
 import './card.css';
 import PostList from './postList.js';
 
-function Card() {
+function Card({isDarkMode}) {
   const location = useLocation();
   const user = location.state && location.state.user;
 
@@ -29,6 +29,7 @@ function Card() {
       )}
            <span> <input type="text" className="search-input1"  placeholder={`What's on your mind, ${user && user.name}?`}/></span>
            <hr className="divider2" />
+           
           </div>
         </div>
        

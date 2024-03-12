@@ -17,7 +17,7 @@
     align-items: center; /* Align the icon and text vertically */
   }
 
-  .nav-link:hover {
+  .top-story i:hover {
     color: blue; /* Change text color to blue on hover */
     text-decoration: underline; /* Add underline on hover */
   }
@@ -26,10 +26,6 @@
     margin-right: 5rem; /* Add margin between each list item */
   }
 
-  .nav-link:active svg,
-.nav-link:focus svg {
-  fill: blue;
-}
   
   .nav-link:active,
 .nav-link:focus {
@@ -42,4 +38,24 @@
 }
 
 
+.top-story i{
+  font-size: 22px;
+  padding-bottom: 3px;
+  padding-left: 20px;
+}
 
+.dark-mode .top-story i{
+  font-size: 22px;
+  padding-bottom: 3px;
+  padding-left: 20px;
+  color:white;
+  background: #000;
+}
+
+.dark-mode nav{
+  font-size: 22px;
+  padding-bottom: 3px;
+  padding-left: 20px;
+  color:white;
+  background: #000000;
+}

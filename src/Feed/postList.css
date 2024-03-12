@@ -5,13 +5,13 @@
 
   
 .feed button {
-    background-color: blue; /* Set button background color to blue */
+    background-color: rgb(51, 0, 255); /* Set button background color to blue */
     color: white; /* Set button text color to white */
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-bottom: 200px; /* Add some margin below the button */
+    margin-bottom: 10px; /* Add some margin below the button */
   }
 
 
@@ -70,3 +70,11 @@
   margin-top: -15px;
  
 }
+
+.AddPostModel{
+  margin-top: 100px;
+  margin-left: 100px;
+}
+
+
+

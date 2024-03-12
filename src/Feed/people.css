@@ -1,23 +1,21 @@
 
 .list-container {
-
     position: fixed; /* Position the container relative to the viewport */
-    bottom: -100px; /* Distance from the bottom of the viewport */
+    bottom: 55px; /* Distance from the bottom of the viewport */
     right: 20px; /* Distance from the right of the viewport */
   }
 
 
-
 .circular-image {
-  border-radius: 50%; /* Makes the image circular */
-  width: 50px; /* Set the width of the image */
-  height: 50px; /* Set the height of the image */
-  object-fit: cover; /* Ensures the image covers the circular container */
-}
+    border-radius: 50%; /* Makes the image circular */
+    width: 50px; /* Set the width of the image */
+    height: 50px; /* Set the height of the image */
+    object-fit: cover; /* Ensures the image covers the circular container */
+  }
 
+  
 
-
-  .list-group-item {
+  .list-group-item00 {
     display: flex; /* Use flexbox */
     align-items: center; /* Align items vertically */
     border: 0;
@@ -35,10 +33,18 @@
     text-overflow: ellipsis; /* Show ellipsis (...) for overflow text */
   }
 
-  .list-group {
+  .list-group00 {
     width: 180px;
     height: 500px;
    margin-bottom: 0px;
     
+}
 
+.dark-mode   .list-group-item00 {
+  background-color: #111 ; /* Dark background color */
+   color: #fff;
+}
+
+.list-group-item00:Hover {
+  background-color: lightgray;
 }
