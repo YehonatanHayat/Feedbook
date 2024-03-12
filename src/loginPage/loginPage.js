@@ -37,7 +37,7 @@ function LoginPage() {
       console.log('Login successful');
       setIsLoggedIn(true);
       setError('');
-     navigate('/feed', {state: {user}});
+      navigate('/feed', { state: { user: user || null } });
     } else {
       setError('Invalid email or password');
     }
