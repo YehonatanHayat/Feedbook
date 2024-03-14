@@ -54,7 +54,7 @@ function CommentButton({ postId }) {
                                         <div className="comment" style={{ backgroundColor: '#f2f2f2', padding: '10px', borderRadius: '5px', position: 'relative' }}>
                                             {comment.text}
                                             <div className="delete-comment" onClick={() => handleDeleteComment(index)}>
-                                                <i className="bi bi-x" style={{ position: 'absolute', top: '5px', right: '5px', cursor: 'pointer' }}></i>
+                                                <i className="bi bi-x" style={{ position: 'absolute', top: '5px', right: '5px', cursor: 'pointer' }}data-testid={`delete-comment-button-${index}`}></i>
                                             </div>
                                         </div>
                                         {index !== comments.length - 1 && <hr className="comment-divider" />}
