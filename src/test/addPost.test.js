@@ -7,6 +7,3 @@ test('renders post list', () => {
   const addPostButton = getByText('Add Post');
   expect(addPostButton).toBeInTheDocument();
 });
-
-
-
