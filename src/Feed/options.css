@@ -1,20 +1,21 @@
 
 
-.list-group-item{
+.shortcuts .list-group-item1{
     border: 0;
     height: 50px;
     
 
 }
 
-.list-group {
-    width: 200px;
+.list-group1 .shortcuts{
+    width: 300px;
     height: 80x;
     margin-top: 30px;
+    margin-left: -120px;
 
 }
 
-.list-group-item:Hover {
+.list-group-item1:Hover {
    background-color: lightgray;
 }
 
@@ -30,6 +31,7 @@
     font-size: 20px; /* Decrease font size */
     margin-bottom: 10px;
     margin-left: -50px;
+    width: 100px;
 
     
   }
@@ -38,3 +40,8 @@
     margin-left: -70px;
   }
 /*  */
+
+.night-mode-list2 {
+  background-color: #111 ; /* Dark background color */
+   color: #fff;
+}

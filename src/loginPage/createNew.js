@@ -1,16 +1,14 @@
+// Code to create a new user account
 import React, { useState, useEffect } from 'react';
-import './createNew.css'; // Import the CSS file
+import './createNew.css';
 import DateInput from './dateInput.js';
 import Gender from './gender.js';
 import { useUserInitialization } from './users.js';
 import TakePhoto from './takePhoto';
-
-
-function CreateNew() {
-  const [va, setVa] = useState(false); // Initialize va state variable
+import PasswordInput from './passwordInput';
+function CreateNew({ isNightMode }) {
+  const nightModeClass = isNightMode ? 'nightMode' : '';
   useEffect(() => {
-
-  
     // Initialize Bootstrap popover when component mounts
     const popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
     popoverTriggerList.map(function (popoverTriggerEl) {
@@ -36,9 +34,9 @@ function CreateNew() {
       document.removeEventListener('click', handleDocumentClick);
     };
   }, []);
-
+  const [name, setName]= useState('');
+  const [email, setEmail] = useState('');
   const { users, setUsers } = useUserInitialization();
-
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
@@ -50,14 +48,26 @@ function CreateNew() {
   const [emailError, setEmailError] = useState('');
   const [gender, setGender] = useState('');
   const [genderError, setGenderError] = useState('');
-  const [photo, setPhoto] = useState(null); // Add this line to declare setPhoto
-  const [photoError, setPhotoError] = useState(''); // Add this line to declare photoError
+  const [photo, setPhoto] = useState(null);
+  //const [photoError, setPhotoError] = useState('');
   const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,14}$/;
+  const [nameError, setNameError] = useState('');
 
+  const validateName = (name) => {
+    const nameRegex = /^[a-zA-Z\s]*$/;
+    return nameRegex.test(name);
+  };
+
+  const handleNameBlur = () => {
+    if (!validateName(name)) {
+      setNameError('Name should contain only English letters');
+    } else {
+      setNameError('');
+    }
+  };
 
   const handlePhotoSelect = (selectedPhoto) => {
-    setPhoto(selectedPhoto); // Update the photo state with the selected photo
-  };
+    setPhoto(selectedPhoto);};
 
   const handlePasswordChange = (event) => {
     const newPassword = event.target.value;
@@ -82,7 +92,6 @@ function CreateNew() {
       setPasswordError('Passwords do not match');
       setShowPasswordError(true);
     } else {
-      setPasswordError('');
       setShowPasswordError(false);
     }
   };
@@ -90,111 +99,148 @@ function CreateNew() {
   const handleGenderChange = (selectedGender) => {
     setGender(selectedGender);
   };
-  
+  // If all fields are filled, return true to close the modal
+  const handleCloseModel = () => {
+    // Check if all fields are filled
+    if (!year || !month || !day || !gender || !password || !confirmPassword ||emailError || !name) {
+      return false; // Return false if any field is empty
+    }
+    return true;
+  };
 
-  
   const handleSubmit = (event) => {
     event.preventDefault();
 
-   
-
-    // Check if year, month, day, and photo are filled
-    if (!year || !month || !day) {
-      setYearError('Please select birthday date');
-      return; // Prevent further execution if any of year, month, or day is missing
-    } else {
-    
-      setYearError('');
-    }
-    if (!gender) {
-      setGenderError('Please select gender');
-      return; // Prevent further execution if any of year, month, or day is missing
-    } else {
-    
-      setGenderError('');
-    }
-
-    // Check if photo is uploaded
-    if (!photo) {
-      setPhotoError('Please upload a photo');
-      return;
-    } else {
-      
-      setPhotoError('');
-    }
-
-    if (year > 2010) {
-      setYearError('Sorry, it\'s not possible to open an account under 14');
-      return; // Prevent further execution if year is invalid
-    } else {
-      setYearError('');
-    }
-
     // Check if the email already exists in the array of users
-    const userEmail = document.getElementById('email').value;
+    const userEmail = email;
     const emailExists = users.some(user => user.email === userEmail);
+
+    // Show error if email already exists
     if (emailExists) {
-      setEmailError('Email is already in use');
+      setEmailError('Email already exists');
       return;
     } else {
-      setEmailError('');
-    }
-    setVa(false);
+      setEmailError('');}
+
     // If all validations pass, create a new user object
     const newUser = {
-      
+      name: name,
       email: userEmail,
       password: password,
       dob: `${year}-${month}-${day}`,
       gender: gender,
-      photo: photo // Add photo to newUser object
+      photo: photo 
     };
 
     // Add the new user to the array of users
     setUsers([...users, newUser]);
 
+    resetFields();
+  };
 
+  const resetFields = () => {
+    setName('');
+    setEmail('');
+    setPassword('');
+    setConfirmPassword('');
+    setYear('');
+    setMonth('');
+    setDay('');
+    setGender('');
+    setPhoto(null);
+  };
+
+  const handlePasswordFocus = () => {
+    // Check if the email already exists in the array of users
+    const userEmail = email;
+    const emailExists = users.some(user => user.email === userEmail);
+
+    // Show error if email already exists
+    if (emailExists) {
+      setEmailError('Email already exists');
+    } else {
+      setEmailError('');
+    }
   };
 
   return (
-    
-    <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div className={`createNew ${nightModeClass}`}>
+    <div className="modal fade" id="signUp-modal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
             <h1 className="modal-title fs-5">Sign up</h1>
           </div>
-          
           <div className="create-new-modal">
             <form onSubmit={handleSubmit}>
+            
+            <div className="mb-3 row">
+  <div className="col">
+    <input
+      type="name"
+      className="form-control"
+      value={name}
+      onChange={(e) => setName(e.target.value)}
+      onBlur={handleNameBlur} // Add onBlur event handler
+      placeholder="Full name"
+      required
+    />
+    {nameError && <div className="text-danger">{nameError}</div>}
+  </div>
+</div>
+
+
               <div className="mb-3 row">
                 <div className="col">
-                  <input type="email" className="form-control" id="email" placeholder="Email" required />
+                  <input type="email" className="form-control" id="email" value={email} onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Email"
+                    required
+                  />
                   {emailError && <div className="text-danger">{emailError}</div>}
                 </div>
               </div>
-              <div className="mb-3">
-              <input type="password" className="form-control" id="password" placeholder="Password" value={password} onChange={handlePasswordChange} required data-bs-toggle="tooltip" data-bs-placement="right" title="The password must consists of 8-14 combination of letters and numbers"/>              </div>
-              <div className="mb-3">
-                <input type="password" className="form-control" id="confirmPassword" placeholder="Confirm password" value={confirmPassword} onChange={handleConfirmPasswordChange} onBlur={handleConfirmPasswordChange} required />
+              <PasswordInput password={password} setPassword={setPassword} confirmPassword={confirmPassword}
+                        setConfirmPassword={setConfirmPassword} handlePasswordChange={handlePasswordChange}
+                        handleConfirmPasswordChange={handleConfirmPasswordChange}
+                        handlePasswordFocus={handlePasswordFocus}
+                        showPasswordError={showPasswordError}
+                        passwordError={passwordError}/>
+              {/* <div className="mb-3">
+                <input type="password"className="form-control"id="password"placeholder="Password"value={password}onChange={handlePasswordChange}
+                  onFocus={handlePasswordFocus} // Check email existence on focus
+                  required
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="right"
+                  title="The password must consists of 8-14 combination of letters and numbers"
+                />
+              </div> */}
+              {/* <div className="mb-3">
+                <input
+                  type="password"
+                  className="form-control"
+                  id="confirmPassword"
+                  placeholder="Confirm password"
+                  value={confirmPassword}
+                  onChange={handleConfirmPasswordChange}
+                  onBlur={handleConfirmPasswordChange}
+                  required
+                />
                 {showPasswordError && <div className="text-danger">{passwordError}</div>}
-              </div>
+              </div> */}
               <DateInput year={year} setYear={setYear} month={month} setMonth={setMonth} day={day} setDay={setDay} yearError={yearError} />
               <Gender onChange={handleGenderChange} genderError={genderError} />
               <TakePhoto onPhotoSelect={handlePhotoSelect} />
-              {photoError && <div className="text-danger">{photoError}</div>}
+              {/* {photoError && <div className="text-danger">{photoError}</div>} */}
               <div className="modal-footer">
-                <button type="submit" className="btn btn-primary" >Register</button>
+                <button type="submit" className="btn btn-primary" disabled={!handleCloseModel()} data-bs-dismiss="modal">Register</button>
               </div>
             </form>
           </div>
         </div>
       </div>
-      
+    </div>
     </div>
   );
 }
 
 export default CreateNew;
-
-// data-bs-dismiss="modal"disabled={va}

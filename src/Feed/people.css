@@ -1,7 +1,7 @@
 
 .list-container {
     position: fixed; /* Position the container relative to the viewport */
-    bottom: 20px; /* Distance from the bottom of the viewport */
+    bottom: 55px; /* Distance from the bottom of the viewport */
     right: 20px; /* Distance from the right of the viewport */
   }
 
@@ -15,9 +15,12 @@
 
   
 
-  .list-group-item {
+  .list-group-item00 {
     display: flex; /* Use flexbox */
     align-items: center; /* Align items vertically */
+    border: 0;
+    height: 70px;
+    
   }
   
   /* Define styles for the name */
@@ -29,3 +32,19 @@
     
     text-overflow: ellipsis; /* Show ellipsis (...) for overflow text */
   }
+
+  .list-group00 {
+    width: 180px;
+    height: 500px;
+   margin-bottom: 0px;
+    
+}
+
+.dark-mode   .list-group-item00 {
+  background-color: #111 ; /* Dark background color */
+   color: #fff;
+}
+
+.list-group-item00:Hover {
+  background-color: lightgray;
+}

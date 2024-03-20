@@ -10,8 +10,16 @@
   .title{
 
     padding: 10px;
-    margin-left: -80%;
+    margin-left: 0%;
   }
 
-
+  .form-control.small-input {
+    width: 50%; /* Adjust this value to make the input field smaller */
+    /* Add other CSS properties as needed */
+  }
+  .flex-container {
+    display: flex;
+    align-items: center; /* This will vertically center align the items */
+    gap: 10px; /* This will add a gap between the items */
+  }
   

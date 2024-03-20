@@ -1,12 +1,8 @@
 
 import './App.css';
-import FeedPage from './Feed/feed.js';
+import Feed from './Feed/feed.js';
 import  LoginPage from'./loginPage/loginPage.js';
-import { BrowserRouter, Routes, Route, Link, Navigate, useNavigate } from 'react-router-dom';
-
-
-
-
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 
 function App() {
@@ -15,7 +11,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LoginPage/>}></Route>
-          <Route path ="feed" element={<FeedPage/>}></Route>
+          <Route path ="feed" element={<Feed />}></Route>
+          
       
       </Routes>
       </BrowserRouter>
