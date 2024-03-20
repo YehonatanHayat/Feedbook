@@ -10,7 +10,7 @@ How to run:
 
 3. Open the project by running npm start, this will take you to localhost:3000.
 
-4. To sign in, first you need to register. Fill in all the fields of new account according to the guide lines. After creating new account enter user name and password to sign in.
+4. To sign in, first you need to register. Fill in all the fields of new account according to the guide lines. After creating new account enter user name and password to sign in. We used a built in user for entering - name: yosi@gmail.com, password: 1234. 
 
 5. In the feed page there is button to add posts, you can also delete, like, edit and comment on posts.  In the top right of the page the is an arrow down button, by clicking on it a dropdown menu appears in which you can change page to dark mode and log out.  You can only edit posts that you added (not the built in postrs)
 
