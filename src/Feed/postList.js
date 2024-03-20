@@ -26,10 +26,12 @@ function PostList({isDarkMode}) {
     const addPost = (content, author, pic = null) => {
         const newPost = {
             id: posts.length + 1,
-            pic: pic || '', // Use provided pic or empty string if not provided
+            pic: pic || '',
             content,
             author,
-            date: new Date().toLocaleString()
+            date: new Date().toLocaleString(),
+            editable: true,
+            
         };
         setPosts([...posts, newPost]);
     };
@@ -39,12 +41,23 @@ function PostList({isDarkMode}) {
         setPosts(posts.filter(post => post.id !== id));
     };
 
+    const handleEditPost = (id, editedContent) => {
+        const updatedPosts = posts.map((post) => {
+          if (post.id === id) {
+            return { ...post, content: editedContent };
+          }
+          return post;
+        });
+        setPosts(updatedPosts);
+      };
+
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const content = e.target.elements.content.value;
         const picInput = e.target.elements.pic;
         if (!picInput.files || !picInput.files[0]) {
-            // If no file is selected, add the post without a picture
+
             addPost(content, <UserInput />);
             e.target.reset();
             return;
@@ -60,64 +73,50 @@ function PostList({isDarkMode}) {
     };
     
 
-    return (
-        <div className="feed">
 
-<div className="post-container">
-           
-            {posts.map((post) => (
-                <Post
-                    key={post.id}
-                    id={post.id}
-                    content={post.content}
-                    author={post.author}
-                    date={post.date}
-                    pic={post.pic}
-                    onDelete={deletePost}
-                />
-            ))}
-            {/* Example form to add new posts */}
-            </div>
-            <form onSubmit={handleSubmit}>
-                
-               
-                {/* Add file input for selecting an image */}
-               
-
-               
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
- Add Post
-</button>
-
-
-<div class="modal fade AddPostModel" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-centered" >
-    <div class="modal-content post">
-     
-      <div class="modal-body post">
-        <input type="text" name="content" placeholder="Enter post content" />
-        <input type="file" name="pic" accept="image/*" />
-
-        <div class="button-group">
-          <button
-            type="submit"
-            class="btn btn-primary"
-            data-bs-dismiss="modal" 
-          >
-           Done
+return (
+  <div className="feed">
+      <form onSubmit={handleSubmit}>
+          <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Add Post
           </button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        </div>
+          <div className="modal fade AddPostModel" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div className="modal-dialog modal-centered">
+                  <div className="modal-content post">
+                      <div className="modal-body post">
+                          <input type="text" name="content" placeholder="Enter post content" />
+                          <input type="file" name="pic" placeholder="Choose an image" accept="image/*" />
+                          <div className="button-group">
+                              <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">
+                                  Done
+                              </button>
+                              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">
+                                  Close
+                              </button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </form>
+
+      <div className="post-container">
+          {posts.map((post) => (
+              <Post
+                  key={post.id}
+                  id={post.id}
+                  content={post.content}
+                  author={post.author}
+                  date={post.date}
+                  pic={post.pic}
+                  onDelete={deletePost}
+                  onEdit={handleEditPost}
+                  editable={post.editable} // Pass the edit function to the Post component
+              />
+          ))}
       </div>
-    </div>
   </div>
-</div>
-
-
-
-           </form>
-        </div>
-    );
+);
 }
 
 export default PostList;
