@@ -7,7 +7,19 @@
         "pic": "sun.jpg",
         "content": "Here comes the sun!",
         "author": "Joe Buck",
-        "date": "1 month ago"
+        "date": "1 month ago",
+        "comments": [
+            {
+                "postId": 1,
+                "author": "Sally Smith",
+                "text": "Beautiful!"
+            },
+            {
+                "postId": 1,
+                "author": "John Johnson",
+                "text": "Love it!"
+            }
+        ]
     },
     {
         "id": 2,

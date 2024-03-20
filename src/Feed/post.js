@@ -11,7 +11,7 @@ function Post({ id, content, author, date, pic, onDelete }) {
   
     return (
       <div className="post">
-        <button className="delete-button" onClick={handleDelete}>
+        <button className="delete-button" onClick={handleDelete} data-testid="delete-button">
           &#10006;
         </button>
         <div className="author-date-container">

@@ -60,64 +60,110 @@ function PostList({isDarkMode}) {
     };
     
 
-    return (
-        <div className="feed">
+//     return (
+//         <div className="feed">
 
-<div className="post-container">
+// <div className="post-container">
            
-            {posts.map((post) => (
-                <Post
-                    key={post.id}
-                    id={post.id}
-                    content={post.content}
-                    author={post.author}
-                    date={post.date}
-                    pic={post.pic}
-                    onDelete={deletePost}
-                />
-            ))}
-            {/* Example form to add new posts */}
-            </div>
-            <form onSubmit={handleSubmit}>
+//             {posts.map((post) => (
+//                 <Post
+//                     key={post.id}
+//                     id={post.id}
+//                     content={post.content}
+//                     author={post.author}
+//                     date={post.date}
+//                     pic={post.pic}
+//                     onDelete={deletePost}
+//                 />
+//             ))}
+//             {/* Example form to add new posts */}
+//             </div>
+//             <form onSubmit={handleSubmit}>
                 
                
-                {/* Add file input for selecting an image */}
+//                 {/* Add file input for selecting an image */}
                
 
                
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
- Add Post
-</button>
+//                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+//  Add Post
+// </button>
 
 
-<div class="modal fade AddPostModel" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-centered" >
-    <div class="modal-content post">
+// <div class="modal fade AddPostModel" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+//   <div class="modal-dialog modal-centered" >
+//     <div class="modal-content post">
      
-      <div class="modal-body post">
-        <input type="text" name="content" placeholder="Enter post content" />
-        <input type="file" name="pic" accept="image/*" />
+//       <div class="modal-body post">
+//         <input type="text" name="content" placeholder="Enter post content" />
+//         <input type="file" name="pic"   placeholder= "Choose an image" accept="image/*" />
 
-        <div class="button-group">
-          <button
-            type="submit"
-            class="btn btn-primary"
-            data-bs-dismiss="modal" 
-          >
-           Done
+//         <div class="button-group">
+//           <button
+//             type="submit"
+//             class="btn btn-primary"
+//             data-bs-dismiss="modal" 
+//           >
+//            Done
+//           </button>
+//           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+//         </div>
+//       </div>
+//     </div>
+//   </div>
+// </div>
+
+
+
+//            </form>
+//         </div>
+//     );
+// }
+
+// export default PostList;
+
+
+return (
+  <div className="feed">
+      <form onSubmit={handleSubmit}>
+          <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Add Post
           </button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        </div>
+          <div className="modal fade AddPostModel" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div className="modal-dialog modal-centered">
+                  <div className="modal-content post">
+                      <div className="modal-body post">
+                          <input type="text" name="content" placeholder="Enter post content" />
+                          <input type="file" name="pic" placeholder="Choose an image" accept="image/*" />
+                          <div className="button-group">
+                              <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">
+                                  Done
+                              </button>
+                              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">
+                                  Close
+                              </button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </form>
+
+      <div className="post-container">
+          {posts.map((post) => (
+              <Post
+                  key={post.id}
+                  id={post.id}
+                  content={post.content}
+                  author={post.author}
+                  date={post.date}
+                  pic={post.pic}
+                  onDelete={deletePost}
+              />
+          ))}
       </div>
-    </div>
   </div>
-</div>
-
-
-
-           </form>
-        </div>
-    );
+);
 }
 
 export default PostList;
