@@ -54,7 +54,6 @@ function LoginPage() {
         </div>
         <Logo/>
 
-
         <div className="right-section-container">
           <div className="right-section">
             <div className="right-section-content">
