@@ -108,35 +108,81 @@ function CreateNew({ isNightMode }) {
     return true;
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
 
-    // Check if the email already exists in the array of users
-    const userEmail = email;
-    const emailExists = users.some(user => user.email === userEmail);
+  //   // Check if the email already exists in the array of users
+  //   const userEmail = email;
+  //   const emailExists = users.some(user => user.email === userEmail);
 
-    // Show error if email already exists
-    if (emailExists) {
-      setEmailError('Email already exists');
-      return;
-    } else {
-      setEmailError('');}
+  //   // Show error if email already exists
+  //   if (emailExists) {
+  //     setEmailError('Email already exists');
+  //     return;
+  //   } else {
+  //     setEmailError('');}
 
-    // If all validations pass, create a new user object
-    const newUser = {
-      name: name,
-      email: userEmail,
-      password: password,
-      dob: `${year}-${month}-${day}`,
-      gender: gender,
-      photo: photo 
-    };
+  //   // If all validations pass, create a new user object
+  //   const newUser = {
+  //     name: name,
+  //     email: userEmail,
+  //     password: password,
+  //     dob: `${year}-${month}-${day}`,
+  //     gender: gender,
+  //     photo: photo 
+  //   };
 
-    // Add the new user to the array of users
-    setUsers([...users, newUser]);
+  //   // Add the new user to the array of users
+  //   setUsers([...users, newUser]);
 
-    resetFields();
+  //   resetFields();
+  // };
+
+
+
+// Inside handleSubmit function in CreateNew.js
+
+const handleSubmit = async (event) => {
+  event.preventDefault();
+
+  const newUser = {
+    name,
+    email,
+    password,
+    dob: `${year}-${month}-${day}`,
+    gender,
+    photo
   };
+
+  try {
+    // Send POST request to backend
+    const response = await fetch('http://localhost:8080/api/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newUser)
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to create user');
+    }
+
+    // Reset form fields if user creation is successful
+    resetFields();
+    console.log('User created successfully');
+    // Optionally, handle success message or redirection
+  } catch (error) {
+    console.error('Error creating user:', error.message);
+    // Optionally, show error message to the user
+  }
+};
+
+
+
+
+
+
 
   const resetFields = () => {
     setName('');
