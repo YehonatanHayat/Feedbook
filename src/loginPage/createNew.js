@@ -108,50 +108,72 @@ function CreateNew({ isNightMode }) {
     return true;
   };
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
 
-  //   // Check if the email already exists in the array of users
-  //   const userEmail = email;
-  //   const emailExists = users.some(user => user.email === userEmail);
+// const handleSubmit = async (event) => {
+//   event.preventDefault();
 
-  //   // Show error if email already exists
-  //   if (emailExists) {
-  //     setEmailError('Email already exists');
-  //     return;
-  //   } else {
-  //     setEmailError('');}
+//   const newUser = {
+//     name,
+//     email,
+//     password,
+//     dob: `${year}-${month}-${day}`,
+//     gender,
+//     photo
+//   };
 
-  //   // If all validations pass, create a new user object
-  //   const newUser = {
-  //     name: name,
-  //     email: userEmail,
-  //     password: password,
-  //     dob: `${year}-${month}-${day}`,
-  //     gender: gender,
-  //     photo: photo 
-  //   };
+//   try {
+//     // Send POST request to backend
+//     const response = await fetch('http://localhost:8080/api/users', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify(newUser)
+//     });
 
-  //   // Add the new user to the array of users
-  //   setUsers([...users, newUser]);
+//     if (!response.ok) {
+//       throw new Error('Failed to create user');
+//     }
 
-  //   resetFields();
-  // };
+//     // Reset form fields if user creation is successful
+//     resetFields();
+//     console.log('User created successfully');
+//     // Optionally, handle success message or redirection
+//   } catch (error) {
+//     console.error('Error creating user:', error.message);
+//     // Optionally, show error message to the user
+//   }
+// };
 
-
-
-// Inside handleSubmit function in CreateNew.js
 
 const handleSubmit = async (event) => {
   event.preventDefault();
 
+  // Process photo state if it's an object (e.g., an image file)
+  let photoUrl = '';
+  if (photo && typeof photo === 'object') {
+    // Process the photo object to get the URL or file path
+    // For example, if using FileReader API to get the data URL
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      photoUrl = e.target.result; // Assign the data URL to photoUrl
+      createUser(photoUrl); // Call createUser function with the processed photo URL
+    };
+    reader.readAsDataURL(photo); // Read the file as data URL
+  } else {
+    // If photo is already a string or null, pass it directly
+    createUser(photo);
+  }
+};
+
+const createUser = async (photoUrl) => {
   const newUser = {
     name,
     email,
     password,
     dob: `${year}-${month}-${day}`,
     gender,
-    photo
+    photo: photoUrl // Assign the processed photo URL to newUser object
   };
 
   try {
@@ -177,9 +199,6 @@ const handleSubmit = async (event) => {
     // Optionally, show error message to the user
   }
 };
-
-
-
 
 
 

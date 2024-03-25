@@ -30,7 +30,7 @@ function  LoginPage() {
   }, [isNightMode]);
 
 
-  
+
   const handleLogin =  async () => {
     const user ={
       email: email,
@@ -52,6 +52,8 @@ function  LoginPage() {
     const json = await response.json();
     const token = json.token;
     const loggedUser= json.user;
+
+    navigate('/feed', { state: { user: loggedUser } });
   };
 
 
