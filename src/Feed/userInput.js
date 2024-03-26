@@ -1,24 +1,25 @@
-
-
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link, useNavigate } from 'react-router-dom'; // Import Link from react-router-dom
 import './userInput.css'; // Import the CSS file
 
-function UserInput() {
-  const location = useLocation();
-  const user = location.state.user;
 
+function UserInput({user, token}) {
+  const navigate = useNavigate(); 
+  const handleClick = () => {
+    navigate(`/profile/${user.email}`, { state: { user, token } });
+  };
+
+
+  console.log('y token:', token);
   return (
     <div className="user-container">
       {user && (
         <>
-          <div className="user-info">
-            
-            <img
-              src={user.photo}
-              alt="User Photo"
-              className="user-photo"
-            />
+          <div
+            onClick={handleClick}
+            className="user-info"
+          >
+            <img src={user.photo} alt="User Photo" className="user-photo" />
             <div className="user-name">{user.name}</div>
           </div>
         </>
@@ -28,5 +29,4 @@ function UserInput() {
 }
 
 export default UserInput;
-
 
