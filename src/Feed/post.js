@@ -3,7 +3,7 @@ import './post.css';
 import LikeButton from './like.js';
 import Share from './share.js';
 import CommentButton from './comment'; 
-
+import { Link } from 'react-router-dom';
 
 function Post({ id, content, author, date, pic, onDelete, editable = false}) {
   const [isEditing, setIsEditing] = useState(false);
@@ -28,13 +28,20 @@ function Post({ id, content, author, date, pic, onDelete, editable = false}) {
     setEditedContent(e.target.value);
   };
 
+
+
+
+  
+
   return (
     <div className="post">
       <button className="delete-button" onClick={handleDelete} data-testid="delete-button">
         &#10006;
       </button>
       <div className="author-date-container">
-        <h3 className="author">{author}</h3>
+      <Link to={`/profile/${author}`} className="author-link">
+          <h3 className="author">{author}</h3>
+        </Link>
         <p className="date">{date}</p>
       </div>
 
