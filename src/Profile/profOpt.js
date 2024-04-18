@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './profOpt.css'
 
 function NavigationBar() {
   const [activeTab, setActiveTab] = useState('home');
@@ -8,14 +9,14 @@ function NavigationBar() {
   };
 
   return (
-    <div>
-      <div className="navbar">
+    <div className="navbar-containerp">
+      <div className="navbarp">
         <button onClick={() => showContent('home')}>Home</button>
         <button onClick={() => showContent('about')}>About</button>
         <button onClick={() => showContent('contact')}>Contact</button>
       </div>
 
-      <div className="container">
+      <div className="containerp">
         {activeTab === 'home' && <HomeContent />}
         {activeTab === 'about' && <AboutContent />}
         {activeTab === 'contact' && <ContactContent />}

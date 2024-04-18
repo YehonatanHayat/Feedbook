@@ -10,7 +10,7 @@ import Status from './status.js';
 import PostList from './postList.js';
 import Add from './addPost.js';
 import Comment from './comment.js';
-import Prof from './profOpt.js';
+
 import { useLocation, Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import "./feed.css";
