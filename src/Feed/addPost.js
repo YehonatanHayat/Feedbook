@@ -5,17 +5,11 @@ import './postList.css';
 function PostList() {
     const [posts, setPosts] = useState([]);
 
-    useEffect(() => {
-        fetch('/api/posts')
-            .then(response => response.json())
-            .then(data => setPosts(data))
-            .catch(error => console.error('Error fetching posts:', error));
-    }, []);
-
     const deletePost = (id) => {
         setPosts(posts.filter(post => post.id !== id));
     };
 
+    
     return (
         <div className="feed">
 

@@ -54,7 +54,7 @@ function Feed() {
               <Status />
               <Card user={user} />
               <PostList className="post-list" user={user} token={token} /> 
-              <Add />
+              <Add token={token} />
             </div>
             <div className="col">
               <Menu isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
