@@ -149,7 +149,7 @@ function CreateNew({ isNightMode }) {
 const handleSubmit = async (event) => {
   event.preventDefault();
 
-  // Process photo state if it's an object (e.g., an image file)
+
   let photoUrl = '';
   if (photo && typeof photo === 'object') {
     // Process the photo object to get the URL or file path
