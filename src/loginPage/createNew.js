@@ -109,59 +109,20 @@ function CreateNew({ isNightMode }) {
   };
 
 
-// const handleSubmit = async (event) => {
-//   event.preventDefault();
-
-//   const newUser = {
-//     name,
-//     email,
-//     password,
-//     dob: `${year}-${month}-${day}`,
-//     gender,
-//     photo
-//   };
-
-//   try {
-//     // Send POST request to backend
-//     const response = await fetch('http://localhost:8080/api/users', {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json'
-//       },
-//       body: JSON.stringify(newUser)
-//     });
-
-//     if (!response.ok) {
-//       throw new Error('Failed to create user');
-//     }
-
-//     // Reset form fields if user creation is successful
-//     resetFields();
-//     console.log('User created successfully');
-//     // Optionally, handle success message or redirection
-//   } catch (error) {
-//     console.error('Error creating user:', error.message);
-//     // Optionally, show error message to the user
-//   }
-// };
-
-
 const handleSubmit = async (event) => {
   event.preventDefault();
 
 
   let photoUrl = '';
   if (photo && typeof photo === 'object') {
-    // Process the photo object to get the URL or file path
-    // For example, if using FileReader API to get the data URL
+
     const reader = new FileReader();
     reader.onload = (e) => {
-      photoUrl = e.target.result; // Assign the data URL to photoUrl
-      createUser(photoUrl); // Call createUser function with the processed photo URL
+      photoUrl = e.target.result; 
+      createUser(photoUrl); 
     };
-    reader.readAsDataURL(photo); // Read the file as data URL
+    reader.readAsDataURL(photo); 
   } else {
-    // If photo is already a string or null, pass it directly
     createUser(photo);
   }
 };
@@ -173,11 +134,11 @@ const createUser = async (photoUrl) => {
     password,
     dob: `${year}-${month}-${day}`,
     gender,
-    photo: photoUrl // Assign the processed photo URL to newUser object
+    photo: photoUrl,
+    friends: ['jake@q']
   };
 
   try {
-    // Send POST request to backend
     const response = await fetch('http://localhost:8080/api/users', {
       method: 'POST',
       headers: {
@@ -190,13 +151,11 @@ const createUser = async (photoUrl) => {
       throw new Error('Failed to create user');
     }
 
-    // Reset form fields if user creation is successful
     resetFields();
     console.log('User created successfully');
-    // Optionally, handle success message or redirection
+
   } catch (error) {
     console.error('Error creating user:', error.message);
-    // Optionally, show error message to the user
   }
 };
 
