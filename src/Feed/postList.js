@@ -9,7 +9,6 @@ function PostList({ user, token }) {
 
 
   useEffect(() => {
-    // Fetch posts when the component mounts
     fetchPosts();
   }, []);
 
@@ -28,75 +27,19 @@ function PostList({ user, token }) {
       }
   
       const data = await response.json();
-      setPosts(data); // Update state with the fetched posts
+      setPosts(data); 
     } catch (error) {
       console.error('Error fetching posts:', error);
     }
   };
 
 
-
-
-  // const addPost = (content, pic = null) => {
-  //   const formData = new FormData();
-  //   formData.append('content', content);
-  //   formData.append('author', user.name);
-  //   if (pic) {
-  //     formData.append('pic', pic);
-  //   }
-
-  //   fetch(`http://localhost:8080/posts`, {
-  //     method: 'POST',
-  //     headers: {
-  //       authorization: `bearer ${token}`,
-  //     },
-  //     body: formData,
-  //   })
-  //     .then((response) => {
-  //       if (!response.ok) {
-  //         throw new Error('Failed to add post');
-  //       }
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       const newPost = {
-  //         id: data.id,
-  //         pic: data.pic || '',
-  //         content: data.content,
-  //         author: user.name, // Set author to the current user's name
-  //         date: data.date,
-  //         editable: true,
-  //       };
-  //       setPosts([...posts, newPost]);
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error adding post:', error);
-  //     });
-  // };
-
-  const addPost = (content, author, pic = null) => {
-    const newPost = {
-        id: posts.length + 1,
-        pic: pic || '',
-        content,
-        author,
-        date: new Date().toLocaleString(),
-        editable: true,
-        
-    };
-    setPosts([...posts, newPost]);
-    };
-
-
-
-
-  // // Function to delete a post
-  // const deletePost = (id) => {
-  //   setPosts(posts.filter((post) => post.id !== id));
-  // };
-
-
   const deletePost = async (id) => {
+    const confirmation = window.confirm('Are you sure you want to delete this post?');
+    if (!confirmation) {
+      return;
+    }
+    console.log('Deleting post:', id);
     try {
       const response = await fetch(`http://localhost:8080/posts/${id}`, {
         method: 'DELETE',
@@ -107,86 +50,71 @@ function PostList({ user, token }) {
       });
   
       if (!response.ok) {
+        
         throw new Error('Failed to delete post');
       }
-  
-      // Remove the deleted post from the state
-      setPosts(posts.filter((post) => post.id !== id));
     } catch (error) {
       console.error('Error deleting post:', error);
-      // Handle error (e.g., show error message)
+    }
+    fetchPosts();
+  };
+
+  const handleEditPost = async (id) => {
+    console.log('Editing post:', id);
+  
+    try {
+      // Fetch the post content from the server
+      const response = await fetch(`http://localhost:8080/posts/${id}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: `Bearer ${token}`,
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to fetch post content');
+      }
+      
+      const postData = await response.json();
+      const currentContent = postData.content;
+  
+      if (postData.author !== user.name) {
+        throw new Error('You can\'t edit a post that isn\'t yours');
+      }
+      const newContent = window.prompt('Edit post:', currentContent);
+      if (!newContent) {
+        return;
+      }
+
+      await updatePostContent(id, newContent);
+    } catch (error) {
+      console.error('Error editing post:', error);
+      alert(error.message);
+    }
+  };
+  
+  const updatePostContent = async (id, newContent) => {
+    try {
+      const response = await fetch(`http://localhost:8080/posts/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ content: newContent }),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to update post content');
+      }
+  
+      fetchPosts();
+    } catch (error) {
+      console.error('Error updating post content:', error);
     }
   };
 
-
-
-
-
-
-  const handleEditPost = (id, editedContent) => {
-    const updatedPosts = posts.map((post) => {
-      if (post.id === id) {
-        return { ...post, content: editedContent };
-      }
-      return post;
-    });
-    setPosts(updatedPosts);
-  };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   const content = e.target.elements.content.value;
-  //   const picInput = e.target.elements.pic;
-  //   if (!picInput.files || !picInput.files[0]) {
-  //     addPost(content);
-  //     e.target.reset();
-  //     return;
-  //   }
-
-  //   const reader = new FileReader();
-  //   reader.onload = (event) => {
-  //     const pic = event.target.result;
-  //     addPost(content, pic);
-  //     e.target.reset();
-  //   };
-  //   reader.readAsDataURL(picInput.files[0]); // Read the selected file as a data URL
-  // };
-
-
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const content = e.target.elements.content.value;
-  //   const picInput = e.target.elements.pic;
-    
-  //   const formData = new FormData();
-  //   formData.append('content', content);
-  //   formData.append('author', user.name);
-  //   if (picInput.files && picInput.files[0]) {
-  //     formData.append('pic', picInput.files[0]);
-  //   }
-
-
-  //   try {
-  //     const response = await fetch('http://localhost:8080/posts', {
-  //       method: 'POST',
-  //       headers: {
-  //         authorization: `Bearer ${token}`,
-  //         'Content-Type': 'application/json'
-  //       },
-  //       body: formData,
-  //     });
-
-  //     if (!response.ok) {
-  //       throw new Error('Failed to add post');
-  //     }
-
-  //     const data = await response.json();
-  //     // Update state with the newly created post
-  //   } catch (error) {
-  //     console.error('Error adding post:', error);
-  //   }
-  // };
 
 
 
@@ -197,14 +125,13 @@ function PostList({ user, token }) {
     
     let photoUrl = '';
     if (picInput.files && picInput.files[0]) {
-      // Process the photo object to get the URL or file path
-      // For example, if using FileReader API to get the data URL
+
       const reader = new FileReader();
       reader.onload = (e) => {
-        photoUrl = e.target.result; // Assign the data URL to photoUrl
+        photoUrl = e.target.result;
         createPost({ content, author: user.name, photo: photoUrl });
       };
-      reader.readAsDataURL(picInput.files[0]); // Read the file as data URL
+      reader.readAsDataURL(picInput.files[0]);
     } else {
       createPost({ content, author: user.name });
     }
@@ -224,11 +151,8 @@ function PostList({ user, token }) {
       if (!response.ok) {
         throw new Error('Failed to add post');
       }
-  
-      //const data = await response.json();
       await response.json();
       fetchPosts();
-      // Update state with the newly created post
     } catch (error) {
       console.error('Error adding post:', error);
     }
@@ -266,16 +190,16 @@ function PostList({ user, token }) {
 
       <div className="post-container">
         {posts.map((post) => (
+          console.log('Postttttttt:', post._id),
           <Post
-            key={post.id}
-            id={post.id}
+            key={post._id}
+           id={post._id}
             content={post.content}
             author={post.author}
             date={post.date}
             pic={post.pic}
             onDelete={deletePost}
             onEdit={handleEditPost}
-            editable={post.editable}
           />
         ))}
       </div>

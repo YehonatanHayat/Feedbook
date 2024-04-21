@@ -5,17 +5,17 @@ import Share from './share.js';
 import CommentButton from './comment'; 
 import { Link } from 'react-router-dom';
 
-function Post({ id, content, author, date, pic, onDelete, editable = false}) {
+function Post({ id, content, author, date, pic, onDelete, onEdit}) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedContent, setEditedContent] = useState(content);
+
 
   const handleDelete = () => {
     onDelete(id);
   };
 
   const handleEdit = () => {
-    if (!editable) return;
-    setIsEditing(true);
+    onEdit(id);
   };
 
   const handleSave = () => {
@@ -44,16 +44,7 @@ function Post({ id, content, author, date, pic, onDelete, editable = false}) {
         </Link>
         <p className="date">{date}</p>
       </div>
-
-      {editable ? (
-        isEditing ? (
-          <textarea className="edit-content" value={editedContent} onChange={handleContentChange} />
-        ) : (
-          <p className="content">{editedContent}</p>
-        )
-      ) : (
-        <p className="content">{content}</p>
-      )}
+      <div className="content">{content}</div>
       <img src={pic} alt="Post-pic" className="post-pic" />
       <div className="action-buttons">
         {isEditing ? (
