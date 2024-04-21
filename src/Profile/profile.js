@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
+import './profile.css';
+import Prof from './profOpt.js';
+import FriendRequest from './friendReq.js';
 
 function Profile() {
 
@@ -38,13 +41,20 @@ function Profile() {
         <div className="profile">
           <div className="profile-header">
 
-            <img src={userData.photo} width='40' height='50' alt="User Profile" className="profile-picture" />
-            <div className="profile-buttons">
-              <button>Posts</button>
-              <button>Friends</button>
-              <button>XXX</button>
-              <button>LLL</button>
-            </div>
+          <img
+              src={userData.photo}
+              alt="User Profile"
+              className="profile-picture"
+              style={{
+                borderRadius: '50%', // Makes the image round
+                width: '200px', // Adjust the width as needed
+                height: '200px', // Adjust the height as needed
+              }}
+            />
+             <h2 className="profile-username">{userData.name}</h2>
+            
+           <Prof/>
+
           </div>
         </div>
       )}
