@@ -53,3 +53,9 @@
     margin: 0;
   }
   
+
+  .profile-picture {
+    border-radius: 50%; /* Makes the image round */
+    width: 100px; /* Adjust the width as needed */
+    height: 100px; /* Adjust the height as needed */
+  }
