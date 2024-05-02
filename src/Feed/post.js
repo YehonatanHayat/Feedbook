@@ -3,13 +3,12 @@ import './post.css';
 import LikeButton from './like.js';
 import Share from './share.js';
 import CommentButton from './comment'; 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-function Post({ id, content, author, date, pic, onDelete, onEdit}) {
+function Post({ id, content, author, date, pic, onDelete, onEdit, token, email, connectedEmail, connectedUser}) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedContent, setEditedContent] = useState(content);
-
-
+  const navigate = useNavigate(); 
   const handleDelete = () => {
     onDelete(id);
   };
@@ -28,20 +27,24 @@ function Post({ id, content, author, date, pic, onDelete, onEdit}) {
     setEditedContent(e.target.value);
   };
 
-
-
-
   
+  const handleClick = () => {
+    console.log('postConnect',connectedEmail);
+    console.log('connectedUser',connectedUser);
+    navigate(`/profile/${email}`, { state: { author,token: token ,connectedEmail, connectedUser } });
+  };
+
+
 
   return (
+  
     <div className="post">
       <button className="delete-button" onClick={handleDelete} data-testid="delete-button">
         &#10006;
       </button>
       <div className="author-date-container">
-      <Link to={`/profile/${author}`} className="author-link">
-          <h3 className="author">{author}</h3>
-        </Link>
+        <button onClick={handleClick}>{author}</button>
+
         <p className="date">{date}</p>
       </div>
       <div className="content">{content}</div>
@@ -62,3 +65,4 @@ function Post({ id, content, author, date, pic, onDelete, onEdit}) {
 
 
 export default Post;
+
