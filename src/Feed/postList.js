@@ -200,6 +200,10 @@ function PostList({ user, token }) {
             pic={post.pic}
             onDelete={deletePost}
             onEdit={handleEditPost}
+            token={token}
+            email={post.email}
+            connectedEmail={user.email}
+            connectedUser={user}
           />
         ))}
       </div>
