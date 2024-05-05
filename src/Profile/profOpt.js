@@ -8,39 +8,39 @@ function NavigationBar({token, email, areFriends, connectedEmail}) {
 
   console.log('friendStatus', areFriends);
   console.log('connectedEmail', connectedEmail);
-  useEffect(() => {
+  // useEffect(() => {
 
-    console.log("Checking friendship status...");
-    const fetchData = async () => {
-      try {
-        // Fetch friend status
-        const friendResponse = await fetch('http://localhost:8080/api/friend-status', {
-          method: 'GET',
-          headers: {
-          'Content-Type': 'application/json',
-          authorization: `Bearer ${token}`,
-        },
-      });
-      const friendData = await friendResponse.json();
-      setFriendStatus(friendData.status);
+  //   console.log("Checking friendship status...");
+  //   const fetchData = async () => {
+  //     try {
+  //       // Fetch friend status
+  //       const friendResponse = await fetch('http://localhost:8080/api/friend-status', {
+  //         method: 'GET',
+  //         headers: {
+  //         'Content-Type': 'application/json',
+  //         authorization: `Bearer ${token}`,
+  //       },
+  //     });
+  //     const friendData = await friendResponse.json();
+  //     setFriendStatus(friendData.status);
 
 
-      const friendsRequestResponse = await fetch('http://localhost:8080/api/friends-request-status', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          authorization: `Bearer ${token}`,
-        }
-      });
+  //     const friendsRequestResponse = await fetch('http://localhost:8080/api/friends-request-status', {
+  //       method: 'GET',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         authorization: `Bearer ${token}`,
+  //       }
+  //     });
       
-      const friendsRequestData = await friendsRequestResponse.json();
-      setFriendsRequestStatus(friendsRequestData.status);
+  //     const friendsRequestData = await friendsRequestResponse.json();
+  //     setFriendsRequestStatus(friendsRequestData.status);
       
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
-  }, []);
+  //   } catch (error) {
+  //     console.error('Error fetching data:', error);
+  //   }
+  // };
+  // }, []);
  
 
 
