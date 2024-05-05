@@ -92,9 +92,7 @@ function Profile() {
     if (location.state && location.state.connectedUser) {
       setConnectedUser(location.state.connectedUser);
     }
-    console.log('profile token:', token);
-    console.log('connectedUser', connectedUser);
-    console.log('profile email:', email);
+
 
     const fetchUserData = async () => {
       try {
@@ -108,16 +106,16 @@ function Profile() {
 
         console.log('userDataJson:', userDataJson);
         console.log(email);
-        if(userDataJson.friends.includes(connectedUser.email)) {
+        if(connectedUser && userDataJson.friends.includes(connectedUser.email)) {
           setUserRelation(1); // User is a friend
 
-        } else if(userDataJson.requestsForFriends.includes(connectedUser.email)) {
+        } else if(connectedUser && userDataJson.requestsForFriends.includes(connectedUser.email)) {
           setUserRelation(2); // User has sent a friend request
 
         } else if (connectedUser && connectedUser.requestsForFriends.includes(userDataJson.email)) {
           setUserRelation(3); // User received a friend request from this user
 
-        }else if(connectedUser.email === userDataJson.email) {
+        }else if(connectedUser && connectedUser.email === userDataJson.email) {
           setUserRelation(4); // User is looking at their own profile
         }else {
           setUserRelation(0); 
@@ -130,7 +128,7 @@ function Profile() {
     fetchUserData();
   }, [email, token, location.state]);
 
-  console.log('userRelation:', userRelation);
+
   return (
     <div className="profile-container">
       {userData && (
@@ -152,9 +150,9 @@ function Profile() {
             <p>friends: {userData.friends}</p>
             <p>requestsForFriends: {userData.requestsForFriends} </p>
             <p> friends? {userRelation}</p>
-            {userRelation == 1 && <p>You are friends with this user.</p>}
-            {userRelation == 2 && <p>You have sent a friend request to this user.</p>}
-            {userRelation == 3 && <p> this user sent you request</p>}
+            {userRelation === 1 && <p>You are friends with this user.</p>}
+            {userRelation === 2 && <p>You have sent a friend request to this user.</p>}
+            {userRelation === 3 && <p> this user sent you request</p>}
             <Prof token={token} email={email} areFriends={userRelation} connectedEmail={connectedUser.email} />
           </div>
         </div>
