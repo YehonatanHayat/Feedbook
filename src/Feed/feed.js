@@ -32,14 +32,15 @@ function Feed() {
     // Set user details if available in location state
     if (location.state && location.state.user) {
       setUser(location.state.user);
+      console.log('Feed user:', user);
     }
 
     if (location.state && location.state.token) {
       setToken(location.state.token);
     }
     console.log('Feed token:', token);
-    
-  }, [isDarkMode, token]);
+    console.log('Feed user2:', user);
+  }, [isDarkMode, token, user]);
   
     return (
       <div className={`feed-container ${isDarkMode ? 'dark-mode' : ''}`}>

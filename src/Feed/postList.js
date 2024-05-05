@@ -6,14 +6,19 @@ import './postList.css';
 
 function PostList({ user, token }) {
   const [posts, setPosts] = useState([]);
+  const [userFriends, setUserFriends] = useState([]);
 
-
+console.log('Fetching user friends...', user);
   useEffect(() => {
     fetchPosts();
+
   }, []);
 
+
   const fetchPosts = async () => {
+    console.log('Fetching postsqqqqqqqqqqqqqq...',user);
     try {
+      
       const response = await fetch('http://localhost:8080/posts', {
         method: 'GET',
         headers: {
@@ -28,10 +33,13 @@ function PostList({ user, token }) {
   
       const data = await response.json();
       setPosts(data); 
+      console.log('Postsss:', user);
     } catch (error) {
       console.error('Error fetching posts:', error);
     }
   };
+
+
 
 
   const deletePost = async (id) => {
@@ -191,6 +199,7 @@ function PostList({ user, token }) {
       <div className="post-container">
         {posts.map((post) => (
           console.log('Postttttttt:', post._id),
+          // (post.author === user.name || userFriends.includes(post.email)) &&
           <Post
             key={post._id}
            id={post._id}
