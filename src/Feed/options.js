@@ -12,8 +12,6 @@ import UserInput from './userInput.js';
 
 function Options({isDarkMode, user, token}){
  
-  console.log('Options token:', token);
-  console.log('Options user:', user);
     return(
       
     <div >
