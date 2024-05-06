@@ -26,13 +26,11 @@ function Feed() {
   };
 
   useEffect(() => {
-    // Apply dark mode styles
-    document.body.classList.toggle('dark-mode', isDarkMode);
 
-    // Set user details if available in location state
+    document.body.classList.toggle('dark-mode', isDarkMode);
     if (location.state && location.state.user) {
       setUser(location.state.user);
-      console.log('Feed user:', user);
+  
     }
 
     if (location.state && location.state.token) {

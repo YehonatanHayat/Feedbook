@@ -6,25 +6,28 @@ import './postList.css';
 
 function PostList({ user, token }) {
   const [posts, setPosts] = useState([]);
-  const [userFriends, setUserFriends] = useState([]);
+ // const [userFriends, setUserFriends] = useState([]);
 
-console.log('Fetching user friends...', user);
+console.log('tokenPostList:', token);
   useEffect(() => {
-    fetchPosts();
 
-  }, []);
+  
+   fetchPosts();
 
+  }, [user, token]);
 
   const fetchPosts = async () => {
-    console.log('Fetching postsqqqqqqqqqqqqqq...',user);
+
+
     try {
       
-      const response = await fetch('http://localhost:8080/posts', {
+      const response = await fetch(`http://localhost:8080/posts/${user.email}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
           authorization: `Bearer ${token}`,
         },
+   
       });
   
       if (!response.ok) {
@@ -33,13 +36,39 @@ console.log('Fetching user friends...', user);
   
       const data = await response.json();
       setPosts(data); 
-      console.log('Postsss:', user);
+
     } catch (error) {
       console.error('Error fetching posts:', error);
     }
   };
 
 
+  // const getPosts = async (user) => {
+  //   try {
+  //     const response = await fetch(`http://localhost:8080/posts,${user}`, {
+  //       method: 'GET',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         authorization: `Bearer ${token}`,
+  //       },
+  //     });
+  
+  //     if (!response.ok) {
+  //       throw new Error('Failed to fetch posts');
+  //     }
+  
+  //     const data = await response.json();
+  //     setPosts(data); 
+  //     console.log('Postsss:', user);
+  //   } catch (error) {
+  //     console.error('Error fetching posts:', error);
+  //   }
+
+  // };
+
+
+
+  
 
 
   const deletePost = async (id) => {
@@ -147,6 +176,7 @@ console.log('Fetching user friends...', user);
   
   const createPost = async (postData) => {
     try {
+      
       const response = await fetch('http://localhost:8080/posts', {
         method: 'POST',
         headers: {
@@ -198,8 +228,7 @@ console.log('Fetching user friends...', user);
 
       <div className="post-container">
         {posts.map((post) => (
-          console.log('Postttttttt:', post._id),
-          // (post.author === user.name || userFriends.includes(post.email)) &&
+
           <Post
             key={post._id}
            id={post._id}
