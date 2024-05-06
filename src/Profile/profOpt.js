@@ -3,8 +3,8 @@ import './profOpt.css'
 
 function NavigationBar({token, email, areFriends, connectedEmail, userData}) {
   const [activeTab, setActiveTab] = useState('home');
-  const [friendStatus, setFriendStatus] = useState(null);
-  const [friendsRequestStatus, setFriendsRequestStatus] = useState(null);
+  //const [friendStatus, setFriendStatus] = useState(null);
+ // const [friendsRequestStatus, setFriendsRequestStatus] = useState(null);
 
   console.log('userData',userData);
   const friendsList = userData ? userData.friends : [];
@@ -17,40 +17,6 @@ function NavigationBar({token, email, areFriends, connectedEmail, userData}) {
 
   console.log('friendStatus', areFriends);
   console.log('connectedEmail', connectedEmail);
-  // useEffect(() => {
-
-  //   console.log("Checking friendship status...");
-  //   const fetchData = async () => {
-  //     try {
-  //       // Fetch friend status
-  //       const friendResponse = await fetch('http://localhost:8080/api/friend-status', {
-  //         method: 'GET',
-  //         headers: {
-  //         'Content-Type': 'application/json',
-  //         authorization: `Bearer ${token}`,
-  //       },
-  //     });
-  //     const friendData = await friendResponse.json();
-  //     setFriendStatus(friendData.status);
-
-
-  //     const friendsRequestResponse = await fetch('http://localhost:8080/api/friends-request-status', {
-  //       method: 'GET',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         authorization: `Bearer ${token}`,
-  //       }
-  //     });
-      
-  //     const friendsRequestData = await friendsRequestResponse.json();
-  //     setFriendsRequestStatus(friendsRequestData.status);
-      
-  //   } catch (error) {
-  //     console.error('Error fetching data:', error);
-  //   }
-  // };
-  // }, []);
- 
 
 
   const showContent = (tab) => {
@@ -70,6 +36,7 @@ function NavigationBar({token, email, areFriends, connectedEmail, userData}) {
       });
       if (response.ok) {
         console.log("Friend request sent successfully.");
+        window.location.reload();
 
       } else {
         console.error("Failed to send friend request.");
@@ -78,16 +45,6 @@ function NavigationBar({token, email, areFriends, connectedEmail, userData}) {
       console.error('Error sending friend request:', error);
     }
   };
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -104,7 +61,8 @@ function NavigationBar({token, email, areFriends, connectedEmail, userData}) {
       });
       if (response.ok) {
         console.log("Friend request canceled successfully.");
-        // Optionally, you can update the UI to reflect the request status
+        window.location.reload();
+
       } else {
         console.error("Failed to cancel friend request.");
       }
@@ -129,7 +87,7 @@ const cancelFriendship = async () => {
     });
     if (response.ok) {
       console.log("Friendship canceled successfully.");
-      // Optionally, you can update the UI to reflect the friendship status
+      window.location.reload(); 
     } else {
       console.error("Failed to cancel friendship.");
     }
@@ -151,7 +109,7 @@ const acceptFriendRequest = async () => {
     });
     if (response.ok) {
       console.log("Friend request accepted successfully.");
-      // Optionally, you can update the UI to reflect the friendship status
+      window.location.reload(); 
     } else {
       console.error("Failed to accept friend request.");
     }
