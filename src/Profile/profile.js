@@ -140,11 +140,11 @@ function Profile() {
               className="profile-picture"
               style={{
                 borderRadius: '50%', 
-                width: '200px', 
+                width: '600px', 
                 height: '200px',
               }}
             />
-            <h2 className="profile-username">{userData.name}</h2>
+            {/* <h2 className="profile-username">{userData.name}</h2>
             <p>Date of Birth: {userData.dob}</p>
             <p>Gender: {userData.gender}</p>
             <p>friends: {userData.friends}</p>
@@ -152,8 +152,8 @@ function Profile() {
             <p> friends? {userRelation}</p>
             {userRelation === 1 && <p>You are friends with this user.</p>}
             {userRelation === 2 && <p>You have sent a friend request to this user.</p>}
-            {userRelation === 3 && <p> this user sent you request</p>}
-            <Prof token={token} email={email} areFriends={userRelation} connectedEmail={connectedUser.email} />
+            {userRelation === 3 && <p> this user sent you request</p>} */}
+            <Prof userData={userData} token={token} email={email} areFriends={userRelation} connectedEmail={connectedUser.email} />
           </div>
         </div>
       )}

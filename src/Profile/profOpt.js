@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import './profOpt.css'
 
-function NavigationBar({token, email, areFriends, connectedEmail}) {
+function NavigationBar({token, email, areFriends, connectedEmail, userData}) {
   const [activeTab, setActiveTab] = useState('home');
   //const [friendStatus, setFriendStatus] = useState(null);
  // const [friendsRequestStatus, setFriendsRequestStatus] = useState(null);
+
+  console.log('userData',userData);
+  const friendsList = userData ? userData.friends : [];
+
+  
+
+
+
+  console.log('fr',friendsList);
 
   console.log('friendStatus', areFriends);
   console.log('connectedEmail', connectedEmail);
@@ -134,7 +143,8 @@ const acceptFriendRequest = async () => {
   };
 
   return (
-    <div className="navbar-containerp">
+    <div style={{ width: '100%', background: '#f0f0f0', padding: '20px' }}>
+      <div className="navbar-containerp" style={{ width: '80%', margin: 'auto' }}>
       <div className="navbarp">
         <button onClick={() => showContent('home')}>Home</button>
         <button onClick={() => showContent('about')}>About</button>
@@ -145,10 +155,11 @@ const acceptFriendRequest = async () => {
 
       <div className="containerp">
         {activeTab === 'home' && <HomeContent />}
-        {activeTab === 'about' && <AboutContent />}
-        {activeTab === 'contact' && <ContactContent />}
+        {activeTab === 'about' && <AboutContent userData={userData}/> }
+        {activeTab === 'contact' && <ContactContent friendsList={friendsList}/>}
         {activeTab === 'posts' && <PostsContent />}
       </div>
+    </div>
     </div>
   );
 }
@@ -157,12 +168,34 @@ function HomeContent() {
   return <div>Home Content Goes Here</div>;
 }
 
-function AboutContent() {
-  return <div>About Content Goes Here</div>;
+function AboutContent({userData}) {
+  return (
+    <div>
+     
+      {/* Use userData here */}
+      <p>Name: {userData.name}</p>
+      <p>Date of Birth: {userData.dob}</p>
+      <p>Gender: {userData.gender}</p>
+      {/* Add other profile data you want to display */}
+    </div>
+  );
 }
 
-function ContactContent() {
-  return <div>Contact Content Goes Here</div>;
+function ContactContent({ friendsList }) {
+  return (
+    <div>
+     
+      <h3>Friends List:</h3>
+      <ul>
+        {friendsList.map((friend, index) => ( 
+
+
+
+          <li key={index}>{friend}</li>
+        ))}
+      </ul>
+    </div>
+  );
 }
 
 function PostsContent() {
