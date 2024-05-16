@@ -16,31 +16,30 @@ console.log('tokenPostList:', token);
 
   }, [user, token]);
 
-  const fetchPosts = async () => {
+    const fetchPosts = async () => {
 
+      try {
+        
+        const response = await fetch(`http://localhost:8080/api/posts/${user.email}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            authorization: `Bearer ${token}`,
+          },
+    
+        });
+    
+        if (!response.ok) {
+          throw new Error('Failed to fetch posts');
+        }
+    
+        const data = await response.json();
+        setPosts(data); 
 
-    try {
-      
-      const response = await fetch(`http://localhost:8080/posts/${user.email}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          authorization: `Bearer ${token}`,
-        },
-   
-      });
-  
-      if (!response.ok) {
-        throw new Error('Failed to fetch posts');
+      } catch (error) {
+        console.error('Error fetching posts:', error);
       }
-  
-      const data = await response.json();
-      setPosts(data); 
-
-    } catch (error) {
-      console.error('Error fetching posts:', error);
-    }
-  };
+    };
 
 
   // const getPosts = async (user) => {
@@ -78,7 +77,7 @@ console.log('tokenPostList:', token);
     }
     console.log('Deleting post:', id);
     try {
-      const response = await fetch(`http://localhost:8080/posts/${id}`, {
+      const response = await fetch(`http://localhost:8080/api/posts/${id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -98,27 +97,32 @@ console.log('tokenPostList:', token);
 
   const handleEditPost = async (id) => {
     console.log('Editing post:', id);
+    console.log('token:', token);
   
     try {
-      // Fetch the post content from the server
-      const response = await fetch(`http://localhost:8080/posts/${id}`, {
+      console.log('handleeeeeeeeeee:', id);
+      const response = await fetch(`http://localhost:8080/api/posts/${id}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
           authorization: `Bearer ${token}`,
         },
       });
-  
       if (!response.ok) {
+        
         throw new Error('Failed to fetch post content');
       }
       
       const postData = await response.json();
+   
       const currentContent = postData.content;
-  
-      if (postData.author !== user.name) {
-        throw new Error('You can\'t edit a post that isn\'t yours');
-      }
+
+      
+      // if (postData.author !== user.name) {
+      //   console.log('postData.author:', postData.author);
+      //   console.log('user.name:', user.name);
+      //   throw new Error('You can\'t edit a post that isn\'t yours...');
+      // }
       const newContent = window.prompt('Edit post:', currentContent);
       if (!newContent) {
         return;
@@ -127,13 +131,15 @@ console.log('tokenPostList:', token);
       await updatePostContent(id, newContent);
     } catch (error) {
       console.error('Error editing post:', error);
-      alert(error.message);
     }
   };
+
   
   const updatePostContent = async (id, newContent) => {
+    console.log("updatePostContent", id, newContent)
     try {
-      const response = await fetch(`http://localhost:8080/posts/${id}`, {
+      console.log('Updating post:', id);
+      const response = await fetch(`http://localhost:8080/api/posts/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -177,7 +183,7 @@ console.log('tokenPostList:', token);
   const createPost = async (postData) => {
     try {
       
-      const response = await fetch('http://localhost:8080/posts', {
+      const response = await fetch('http://localhost:8080/api/posts', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

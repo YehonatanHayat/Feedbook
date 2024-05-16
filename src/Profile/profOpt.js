@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import './profOpt.css'
+import Post from '../Feed/post.js';
 
-function NavigationBar({token, email, areFriends, connectedEmail}) {
+function NavigationBar({ token, email, areFriends, connectedEmail, userData }) {
   const [activeTab, setActiveTab] = useState('home');
-  //const [friendStatus, setFriendStatus] = useState(null);
- // const [friendsRequestStatus, setFriendsRequestStatus] = useState(null);
-
-  console.log('friendStatus', areFriends);
-  console.log('connectedEmail', connectedEmail);
-
+  const [showPosts, setShowPosts] = useState(false); 
+  const [posts, setPosts] = useState([])
 
   const showContent = (tab) => {
     setActiveTab(tab);
+    if (tab === 'posts') {
+      setShowPosts(true); 
+      getUserPosts(); 
+    } else {
+      setShowPosts(false); 
+    }
   };
+
+
 
   const sendFriendRequest = async () => {
     try {
@@ -110,11 +115,116 @@ const acceptFriendRequest = async () => {
 };
 
 
+const getUserPosts = async () => {
+  try {
+    console.log("Fetching user posts...");
+    const response = await fetch(`http://localhost:8080/api/profile/user-posts/${email}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${token}`,
+      },
+    });
+    if (response.ok) {
+      const postsData = await response.json();
+      console.log("User posts:", postsData);
+      setPosts(postsData[0]);
+    } else {
+      console.error("Failed to fetch user posts.");
+    }
+  } catch (error) {
+    console.error('Error fetching user posts:', error);
+  }
+};
+
+useEffect(() => {
+  if (activeTab === 'posts') {
+    getUserPosts();
+  }
+}, [activeTab]);
 
 
 
+const deletePost = async (id) => {
+  const confirmation = window.confirm('Are you sure you want to delete this post?');
+  if (!confirmation) {
+    return;
+  }
+  console.log('Deleting post:', id);
+  try {
+    const response = await fetch(`http://localhost:8080/api/posts/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      
+      throw new Error('Failed to delete post');
+    }
+  } catch (error) {
+    console.error('Error deleting post:', error);
+  }
+  getUserPosts();
+};
+
+const handleEditPost = async (id) => {
+  console.log('Editing post:', id);
+  console.log('token:', token);
+
+  try {
+    console.log('handleeeeeeeeeee:', id);
+    const response = await fetch(`http://localhost:8080/api/posts/${id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${token}`,
+      },
+    });
+    if (!response.ok) {
+      
+      throw new Error('Failed to fetch post content');
+    }
+    
+    const postData = await response.json();
+    const currentContent = postData.content;
+
+    const newContent = window.prompt('Edit post:', currentContent);
+    if (!newContent) {
+      return;
+    }
+
+    await updatePostContent(id, newContent);
+  } catch (error) {
+    console.error('Error editing post:', error);
+  }
+};
 
 
+const updatePostContent = async (id, newContent) => {
+  console.log("updatePostContent", id, newContent)
+  try {
+    console.log('Updating post:', id);
+    const response = await fetch(`http://localhost:8080/api/posts/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ content: newContent }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to update post content');
+    }
+
+    getUserPosts();
+  } catch (error) {
+    console.error('Error updating post content:', error);
+  }
+};
 
 
 
@@ -133,39 +243,78 @@ const acceptFriendRequest = async () => {
     }
   };
 
+
+
+
+
+
+  const renderPosts = () => {
+    if (showPosts) {
+      return (
+        <div className="post-container">
+          {posts.map((post) => (
+            <Post
+              key={post._id}
+              id={post._id}
+              content={post.content}
+              author={post.author}
+              date={post.date}
+              pic={post.pic}
+              onDelete={deletePost}
+              onEdit={handleEditPost}
+              token={token}
+              email={post.email}
+              connectedEmail={email}
+              connectedUser={email}
+            />
+          ))}
+        </div>
+      );
+    }
+    return null; 
+  };
+
   return (
     <div className="navbar-containerp">
       <div className="navbarp">
         <button onClick={() => showContent('home')}>Home</button>
         <button onClick={() => showContent('about')}>About</button>
         <button onClick={() => showContent('contact')}>Contact</button>
-        <button onClick={() => showContent('posts')}>posts</button>
+        <button onClick={() => showContent('posts')}>Posts</button>
         {renderButton()}
       </div>
-
+      {renderPosts()}
       <div className="containerp">
         {activeTab === 'home' && <HomeContent />}
-        {activeTab === 'about' && <AboutContent />}
-        {activeTab === 'contact' && <ContactContent />}
-        {activeTab === 'posts' && <PostsContent />}
+        {activeTab === 'about' && <AboutContent userData={userData} />}
+        {activeTab === 'contact' && <ContactContent userData={userData} />}
       </div>
     </div>
   );
 }
 
 function HomeContent() {
-  return <div>Home Content Goes Here</div>;
+
+
+  
+  return;
 }
 
-function AboutContent() {
-  return <div>About Content Goes Here</div>;
+function AboutContent({userData}) {
+  return <div> 
+     <h2 className="profile-about">{userData.name}</h2>
+  <p>Date of Birth: {userData.dob}</p>
+  <p>Gender: {userData.gender}</p>
+  <p>friends: {userData.friends}</p>
+</div>;
 }
 
-function ContactContent() {
-  return <div>Contact Content Goes Here</div>;
+function ContactContent({userData}) {
+  return <div>
+   <h2 className="profile-Contact"></h2>
+  <p>friends: {userData.friends}</p>
+  </div>;
 }
 
-function PostsContent() {
-  return <div>Posts Content Goes Here</div>;
-}
+
 export default NavigationBar;
