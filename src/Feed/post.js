@@ -14,6 +14,7 @@ function Post({ id, content, author, date, pic, onDelete, onEdit, token, email, 
   };
 
   const handleEdit = () => {
+    console.log('handleEdit',id);
     onEdit(id);
   };
 
