@@ -72,13 +72,15 @@ function Profile() {
               className="profile-picture"
               style={{
                 borderRadius: '50%', 
-                width: '200px', 
+                width: '600px', 
                 height: '200px',
               }}
             />
+
           
             <Prof token={token} email={email} areFriends={userRelation}
              connectedEmail={connectedUser.email} userData={userData} />
+
           </div>
         </div>
       )}

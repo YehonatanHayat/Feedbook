@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import './profOpt.css'
 import Post from '../Feed/post.js';
 
+
 function NavigationBar({ token, email, areFriends, connectedEmail, userData }) {
   const [activeTab, setActiveTab] = useState('home');
   const [showPosts, setShowPosts] = useState(false); 
   const [posts, setPosts] = useState([])
+
 
   const showContent = (tab) => {
     setActiveTab(tab);
@@ -275,7 +277,8 @@ const updatePostContent = async (id, newContent) => {
   };
 
   return (
-    <div className="navbar-containerp">
+    <div style={{ width: '100%', background: '#f0f0f0', padding: '20px' }}>
+      <div className="navbar-containerp" style={{ width: '80%', margin: 'auto' }}>
       <div className="navbarp">
         <button onClick={() => showContent('home')}>Home</button>
         <button onClick={() => showContent('about')}>About</button>
@@ -286,14 +289,18 @@ const updatePostContent = async (id, newContent) => {
       {renderPosts()}
       <div className="containerp">
         {activeTab === 'home' && <HomeContent />}
+
         {activeTab === 'about' && <AboutContent userData={userData} />}
         {activeTab === 'contact' && <ContactContent userData={userData} />}
+
       </div>
+    </div>
     </div>
   );
 }
 
 function HomeContent() {
+
 
 
   
@@ -307,6 +314,7 @@ function AboutContent({userData}) {
   <p>Gender: {userData.gender}</p>
   <p>friends: {userData.friends}</p>
 </div>;
+
 }
 
 function ContactContent({userData}) {
