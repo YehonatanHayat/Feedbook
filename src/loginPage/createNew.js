@@ -122,6 +122,7 @@ const handleSubmit = async (event) => {
       createUser(photoUrl); 
     };
     reader.readAsDataURL(photo); 
+    
   } else {
     createUser(photo);
   }
@@ -135,7 +136,7 @@ const createUser = async (photoUrl) => {
     dob: `${year}-${month}-${day}`,
     gender,
     photo: photoUrl,
-    friends: ['jake@q']
+    friends: []
   };
 
   try {
