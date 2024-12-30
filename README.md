@@ -93,4 +93,4 @@ The project development was structured for efficiency and clarity:
 
 ---
 
-Make sure to always use the **main_part_3 branch** for the most up-to-date code.
+Make sure to always use the **main-part-3 branch** for the most up-to-date code.
