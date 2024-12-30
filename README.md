@@ -35,7 +35,7 @@ Ensure the following are installed on your system:
    Make sure to switch to the updated branch:
 
    ```bash
-   git checkout main_part_3
+   git checkout main-part-3
    ```
 
 2. **Install Dependencies**:
